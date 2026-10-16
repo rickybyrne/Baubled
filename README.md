@@ -1,12 +1,12 @@
 # Baubled
 
-A personal, non-commercial festive Dublin pub crawl planner. The intended journey is to browse verified pubs, choose and order 1–12 unique stops, review walking directions, and share the ordered plan through a URL.
+A personal, non-commercial, mobile-first Dublin pub crawl planner inspired by the **12 Pubs of Christmas**. The intended journey is to browse approximately 24 verified pubs by map or list, choose 1–12 unique stops, add/remove/replace/reorder them, review walking geometry and instructions, and share the ordered plan through a versioned URL. Shorter plans remain valid; the user's order is preserved without automatic optimisation or a return journey.
 
-Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: [rickybyrne/Baubled](https://github.com/rickybyrne/Baubled). This React/Vite project has its own initial Git history; earlier Baubled repositories and planning are obsolete and are not dependencies of this project.
+Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: [rickybyrne/Baubled](https://github.com/rickybyrne/Baubled). The foundation is committed and pushed as [`0293e6d`](https://github.com/rickybyrne/Baubled/commit/0293e6da409815bc894c98fad5c0f676b2037e7e). Earlier Baubled repositories are obsolete and are not dependencies of this project.
 
 ## Current status
 
-Milestone 1 is in progress. This repository implements the local foundation: a responsive introduction, a working “Plan your route” anchor, and an honest planner placeholder. Pub selection, route building, maps, directions, and sharing are not implemented.
+Milestone 1 is in progress. This repository implements the local foundation: a responsive introduction, a working “Plan your route” anchor, and an honest planner placeholder. Pub selection, route building, maps, directions, and sharing are not implemented. The foundation's [hosted CI run passed](https://github.com/rickybyrne/Baubled/actions/runs/38926238221); the hosted skeleton and public deployment checks remain outstanding. See [progress](docs/progress.md) for dated evidence and limits.
 
 The page runs without accounts, API keys, external fonts, or external runtime services. Operating budget: **€0/month**.
 
@@ -42,7 +42,9 @@ GitHub Actions runs typecheck, lint, tests, and build after `npm ci` on pushes a
 - `src/styles.css`: Tailwind theme, page styles, and focus foundation.
 - `src/App.test.tsx`: page, CTA destination, and skip-link contracts.
 - `vite.config.ts`, `tsconfig.json`, `eslint.config.js`: development checks.
-- [Architecture and future contracts](docs/decisions.md).
+- [Authoritative product brief and launch contracts](docs/product-brief.md).
+- [Eight-milestone backlog and review workflow](docs/backlog.md).
+- [Architecture decisions and provider verification gates](docs/decisions.md).
 - [Progress and validation evidence](docs/progress.md).
 
-Planned hosting is Vercel Hobby for this personal/non-commercial project. No deployment or provider integration has been performed. Provider choices remain provisional and must satisfy the €0 constraint before integration.
+Provisional services are MapLibre GL JS for rendering, MapTiler Free for maps, openrouteservice for walking directions, and Vercel Hobby for personal/non-commercial hosting. No deployment or provider integration has been performed. Current official pricing, charge prevention, technical capabilities, credentials, attribution and storage terms must be verified before approval/integration. Temporary service interruption at quota limits is acceptable; unexpected charges are not. No accounts or credentials are needed for the current skeleton.

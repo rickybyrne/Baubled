@@ -1,46 +1,67 @@
 # Architecture decisions
 
-## Canonical repository — 16 October 2026
+Updated 17 October 2026 following owner approval of the product direction. [Product brief](product-brief.md) owns scope and behavioural contracts, [backlog](backlog.md) sequences delivery, and [progress](progress.md) records evidence. An architectural decision does not itself authorise accounts, credentials, deployment, commits or a feature task.
 
-The owner selected `/Users/rickybyrne/Documents/ChatGPT/baubled` as the permanent, authoritative project, with `https://github.com/rickybyrne/Baubled.git` as its remote. Start an independent initial history from the current React/Vite foundation. Do not import earlier Baubled files, history, instructions, or architectural decisions. The obsolete local repository remains untouched pending a separate deletion request. This decision does not change the application stack, scope, or €0 budget.
+## Accepted — canonical repository
 
-## Local foundation — 14 October 2026
+The owner selected `/Users/rickybyrne/Documents/ChatGPT/baubled` and `https://github.com/rickybyrne/Baubled.git`. The React/Vite foundation is already committed and pushed: `0293e6da409815bc894c98fad5c0f676b2037e7e` (`feat: initialise Baubled application foundation`, 16 October 2026) was both local HEAD and live remote `main` during the 16 October verification. Its [hosted Validate run](https://github.com/rickybyrne/Baubled/actions/runs/38926238221) passed.
 
-Use a single React root page with Vite, strict TypeScript, and Tailwind's Vite plugin. Native fragment links handle navigation without a router or state library. System sans-serif and Georgia provide typography without network requests. CSS theme tokens define forest green, cream, red, gold, spacing, and type; no animation or smooth scrolling is used.
+Do not recreate the initial commit, configure another remote, import the obsolete Next.js project/history, or reconcile its instructions. The owner's repository update supersedes the earlier empty-repository assumption. The obsolete directory remains untouched. The 16 October planning reconciliation did not authorise a commit or push. On 17 October, the owner explicitly authorised publishing the six planning Markdown files with commit subject `docs: establish Baubled product plan`; this does not authorise deployment or another milestone.
 
-Keep one npm lockfile and exact direct dependency versions. Node 24.19.0 and npm 12.2.0 are aligned locally and in CI. React/React DOM 19.3.1, Vite 8.3.4, Tailwind 4.3.3, ESLint 10.12.0, Vitest 5.0.4, and React Testing Library 16.3.3 were selected from official npm metadata. TypeScript is intentionally 6.0.3: typescript-eslint 8.71.2 declares support for TypeScript >=4.8.4 and <6.1.0, so the latest TypeScript 7.0.2 was not selected. Node types stay on major 24. Full exact versions are in package.json and package-lock.json.
+## Accepted — application architecture
 
-Setup references checked for this task:
+Retain React/Vite, strict TypeScript, Tailwind's Vite integration, npm with one lockfile, ESLint, Vitest/React Testing Library, and GitHub Actions. The current single root page uses native fragment navigation and system/Georgia fonts; it needs no router, state library, provider or external font service. Theme tokens live in `src/styles.css`. Keep decoration subtle and respect reduced motion; the existing page has no animation or smooth scrolling.
 
-- [Vite getting started](https://vite.dev/guide/)
-- [Tailwind Vite installation](https://tailwindcss.com/docs/installation/using-vite)
-- [Vitest getting started](https://vitest.dev/guide/)
-- [React Testing Library setup](https://testing-library.com/docs/react-testing-library/setup/)
-- [Node release lifecycle](https://nodejs.org/en/about/previous-releases)
-- [Official npm registry metadata](https://registry.npmjs.org/)
+React/Vite fits an interactive browser application with static data and URL sharing. A framework migration is not justified by CV value. Future editing will use pure operations and `useReducer`, separating ordered IDs, results for that exact order, and interface state; Context only where useful. Contain map-specific logic and normalise routing responses through one small module. This permits later provider migration without designing a generic provider framework now.
 
-The tests check user-facing markup and destination contracts. They do not establish browser focus, anchor scrolling, or responsive layout. Production validation always includes TypeScript checking; Vite transpilation alone is insufficient.
+A backend is not the default. If credential policy or another concrete requirement demands a small serverless endpoint, propose its validation, rate limits and operating constraints before approval. A proxy alone neither guarantees quota protection nor controls separately metered map usage. Frontend environment variables are public. No persisted provider-response cache is assumed until storage terms are checked.
 
-## Future contracts (not implemented)
+## Implemented tooling and historical selection rationale
 
-- Dublin only; 1–12 distinct pubs.
-- Preserve user-selected order. No automatic optimisation and no return leg.
-- One stop has no walking legs.
-- Keep ordered selected IDs, walking results, and interface state separate.
-- Share links will encode a version and ordered permanent pub IDs, never coordinates or provider responses.
-- Frontend environment variables are public, not secret storage.
-- Provider failures must leave route editing and sharing usable.
-- Maps and directions may become unavailable at quota limits rather than incur charges.
+Current manifests pin Node 24.19.0 (`.nvmrc`), npm 12.2.0, React/DOM 19.3.1, Vite 8.3.4, Tailwind 4.3.3, TypeScript 6.0.3, ESLint 10.12.0, Vitest 5.0.4 and React Testing Library 16.3.3. Full versions live in `package.json` and `package-lock.json`; this planning task does not update them. CI uses `.nvmrc` and matching npm; the production build includes TypeScript checking.
 
-## Owner-supplied prior research — 14 October 2026
+The 14 October foundation notes report verification against official npm metadata and selection of TypeScript 6.0.3 because typescript-eslint 8.71.2 supported `>=4.8.4 <6.1.0`, excluding the then-reported latest TypeScript 7.0.2. These selection claims are historical, not a fresh latest-version/compatibility survey in this task. Existing setup references:
 
-The following is prior research supplied by the project owner, **not provider-policy verification performed in this task**:
+- [Vite](https://vite.dev/guide/) and [Tailwind's Vite integration](https://tailwindcss.com/docs/installation/using-vite).
+- [Vitest](https://vitest.dev/guide/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/setup/).
+- [Node release lifecycle](https://nodejs.org/en/about/previous-releases) and [official npm metadata](https://registry.npmjs.org/).
 
-- Mapbox was rejected because it lacks an enforceable monthly spending cap. [Reference](https://docs.mapbox.com/accounts/guides/invoices/)
-- MapTiler Free was provisionally selected for maps because its published policy pauses service at quota. MapLibre is the intended rendering library. [Reference](https://www.maptiler.com/cloud/pricing/)
-- openrouteservice Standard was provisionally selected for walking directions because it provides a €0 plan with enforced request limits. [Plans](https://account.heigit.org/info/plans) · [Terms](https://account.heigit.org/info/tos)
-- Vercel Hobby is intended for this personal/non-commercial deployment. [Reference](https://vercel.com/docs/plans/hobby)
+Tests currently establish markup/destination contracts, not browser focus, layout, venue accuracy or live integration. Add a small Playwright suite later for meaningful journeys, keeping routine provider tests deterministic and separate from approved live smoke checks.
 
-## Integration gates and unresolved questions
+## Accepted — cost boundary; provisional — services
 
-Before any provider integration, verify authentication and browser-origin restrictions, full response contracts and failure handling, attribution/licensing, quota enforcement without charges, and current eligibility for the intended usage. Determine how public frontend credentials should be constrained; do not assume they can be secret. A deployed Dublin walking-route smoke check remains an integration gate. No accounts, keys, mapping dependencies, services, or billing are configured now.
+The operating budget is strictly **€0/month**. The owner accepts temporary feature unavailability at enforced limits. Free allowances, notifications, client-side counters and request cancellation do not guarantee protection from charges. Any future paid migration requires an explicit owner-approved change to this constraint.
+
+The following is **owner-supplied historical research dated 14 October 2026**, not newly verified provider policy in this documentation task. Listing a candidate does not approve a production integration.
+
+| Candidate | Historical rationale | Official starting points |
+| --- | --- | --- |
+| MapLibre GL JS | Intended open-source map renderer replacing Mapbox GL JS. Rendering is separate from tile-service usage policy. | [MapLibre](https://maplibre.org/projects/gl-js/), [React integration](https://visgl.github.io/react-map-gl/docs/get-started) |
+| MapTiler Free | Reportedly pauses at quota and permits personal/non-commercial use without billing information. Earlier research listed 100,000 API requests/month and 5,000 SDK sessions/month; these are different measures, not interchangeable visitor allowances. It also listed one API key, so separate dev/prod keys cannot be assumed. | [Pricing](https://www.maptiler.com/cloud/pricing/), [terms](https://www.maptiler.com/terms/cloud/), [key/origin guidance](https://docs.maptiler.com/guides/credentials/api-key/) |
+| openrouteservice Standard | Reportedly €0 with 2,000 Directions requests/day and 40/minute, errors/blocking at limits, and 50 waypoints. Prior research identified migration to `api.heigit.org` and CC BY-SA 4.0 licensing of results. Reverify the current endpoint, full instructions/leg contract, credential handling and result obligations. | [Plans](https://account.heigit.org/info/plans), [terms](https://account.heigit.org/info/tos), [restrictions](https://openrouteservice.org/restrictions/), [directions documentation checked in the earlier research](https://giscience.github.io/openrouteservice/v9.10.0/api-reference/endpoints/directions/), [migration notice](https://ask.openrouteservice.org/t/reducing-the-quota-of-deprecated-api-api-openrouteservice-org/8013) |
+| Vercel Hobby | Intended free personal/non-commercial hosting with service limits rather than paid overages on the selected plan. Hosting and map/routing limits are independent. | [Hobby documentation](https://vercel.com/docs/plans/hobby) |
+| Mapbox — excluded from the €0 plan | Prior research found no enforceable monthly spending cap; alerts do not stop billed usage. Do not silently reintroduce it. | [Billing guidance](https://docs.mapbox.com/accounts/guides/invoices/) |
+
+## Outstanding verification gates
+
+No provider gate below was newly completed on 16 October. Record each future check's date, primary URL, applicable plan/product/version, finding and unresolved limitation. Pre-integration documentation establishes policy and capability; the approved live smoke test during Milestone 2 establishes actual integration behaviour.
+
+| Gate | Required evidence |
+| --- | --- |
+| Walking contract, before integration | Ordered 2–12-stop pedestrian requests; waypoint limits; street-following geometry and readable instructions; N−1 legs; distance/duration units; longitude/latitude order; exact schema/errors and current API endpoint. |
+| Cost and eligibility, before integration/deployment | Current free-plan eligibility, usage units, daily/monthly quotas, rate limits, resets, and provider-enforced excess behaviour. Confirm the selected account/plan cannot incur automatic charges; alerts alone fail this gate. |
+| Credentials, before integration | Browser-intended versus secret credentials, minimum permissions, supported origin restrictions, dev/prod separation if supported, quota-abuse exposure, rotation and revocation. Decide direct browser access versus a justified serverless endpoint before exposing a key. Never request credentials in chat. |
+| Licensing/data use, before integration or storage | Map/logo/provider/OSM attribution, result and dataset licences distinct from code, permitted use, storage/caching and redistribution. Map-tile permission does not automatically cover catalogue coordinate sourcing. |
+| Hosting, before deployment | Current Hobby eligibility/enforced limits, no paid additions, explicit account/deployment approval, reproducible build configuration and actual deployed source commit. |
+| Live integration, to accept Milestone 2 | Separate approved deployed 12-stop Dublin smoke test: exact order, 11 legs, plausible pedestrian geometry and checked entrances, instructions/metrics and attribution. Record live evidence independently of mocks. |
+| Reliability, built through Milestone 5 | Deterministic quota, timeout, network, authentication, no-route, malformed response and stale-response tests; keep editing/sharing usable when provider features fail. Do not exhaust live quotas to exercise errors. |
+
+If a candidate fails, propose another coherent combination meeting the product and €0 constraints before integrating it. Do not create accounts, use credentials, enable billing, issue live paid requests or deploy infrastructure without explicit owner approval.
+
+## Decisions to make in later scoped tasks
+
+- Catalogue ID grammar, availability/retirement values, permitted coordinate sources and endpoint verification records. No venue records are created in this task.
+- Routing result/error types, validation, debounce interval, timeout/retry messaging and credential placement after provider verification.
+- Exact version-1 URL grammar, duplicate-parameter rules, maximum input length, explicit repair choices and push/replace/back/forward policy. Exact order and rejection of silent repair are already requirements; detailed limits and interactions need a focused decision before implementation.
+- Application code licence and dataset/result attribution presentation, treated separately.
+- Hosting account configuration and deployment procedure. The hosted skeleton remains part of Milestone 1 and requires a separately authorised task.
