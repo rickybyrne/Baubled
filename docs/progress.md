@@ -2,11 +2,13 @@
 
 ## Current status — 17 October 2026
 
-**Milestone 1: in progress.** The local React/Vite foundation, GitHub version control and a hosted CI pass are established. Public hosting and deployed-skeleton verification remain outstanding. Milestones 2–8 are planned, not implemented.
+**Milestone 1: Accepted and complete — 17 October 2026.** The owner reviewed and accepted the deployment verification report, explicitly retaining the outstanding physical-device, cross-browser and screen-reader testing limitations. The local React/Vite foundation, GitHub version control, hosted CI and public skeleton at [baubled.vercel.app](https://baubled.vercel.app/) have supporting evidence below. Milestones 2–8 are planned, not implemented.
 
-**Review status:** the owner has **Accepted** the overall product direction and authorised documentation finalisation, a commit with subject `docs: establish Baubled product plan`, and a normal push to existing `origin/main`. This approval is limited to the six planning Markdown files. No deployment, application change or new milestone is authorised. Acceptance of the entire Milestone 1 remains **Unverified** pending its public deployment gate and owner observations.
+**Review status:** the owner authorised publishing only docs/deployment.md, docs/decisions.md and this record with commit subject `docs: complete Baubled milestone 1 deployment`, followed by a normal push to origin/main and verification of its CI/Vercel results. Physical-device, cross-browser and screen-reader testing remain **Unverified**, not waived or reported as passed. Milestone 2 implementation and hosting-setting changes are not authorised.
 
-**Application baseline:** [`0293e6da409815bc894c98fad5c0f676b2037e7e`](https://github.com/rickybyrne/Baubled/commit/0293e6da409815bc894c98fad5c0f676b2037e7e), `feat: initialise Baubled application foundation`, committed 16 October 2026 at 16:43:16 Europe/Dublin. The documentation publication does not change this application baseline or complete the hosted-skeleton milestone. Its own commit hash and Actions outcome are verified after pushing and reported in the publishing task handoff; see [commit history](https://github.com/rickybyrne/Baubled/commits/main/) and [workflow runs](https://github.com/rickybyrne/Baubled/actions/workflows/ci.yml).
+**Application baseline:** [`0293e6da409815bc894c98fad5c0f676b2037e7e`](https://github.com/rickybyrne/Baubled/commit/0293e6da409815bc894c98fad5c0f676b2037e7e), `feat: initialise Baubled application foundation`, committed 16 October 2026 at 16:43:16 Europe/Dublin. Documentation publication does not change this application baseline. Hosted verification and the owner's explicit acceptance complete Milestone 1.
+
+**First verified deployed source / pre-finalisation HEAD:** [`d7bbe20562a3865cea696f62488faababfffa8aa`](https://github.com/rickybyrne/Baubled/commit/d7bbe20562a3865cea696f62488faababfffa8aa), `docs: establish Baubled product plan`. During public verification, GitHub's main-branch and commit-check APIs confirmed this SHA and [Validate run 38981639259](https://github.com/rickybyrne/Baubled/actions/runs/38981639259) completed successfully. The Vercel dashboard linked the production domain to the same SHA. Local `main` and its existing `origin/main` tracking ref agreed. Preparation began with a clean tree; verification and finalisation began with the three uncommitted preparation/verification documents, which were preserved and updated. The application and configuration remain unchanged. The finalisation commit's own CI and any automatic deployment are checked after pushing and reported in the publishing handoff; earlier results are not attributed to that new commit.
 
 ## Repository and GitHub preflight — verified during 16 October reconciliation
 
@@ -75,12 +77,12 @@ These entries summarise prior project records, not checks newly performed by thi
 - **14 October foundation task:** reported Node 24.19.0/npm 12.2.0, successful install/clean install/typecheck/lint/3 tests/build, and an audit result of 0 vulnerabilities. Initial heading-whitespace test failures were corrected before the recorded pass. Dev desktop and preview mobile/desktop checks covered keyboard anchors, focus, overflow and console output; the two committed screenshots were captured then. The optional fsevents script warning did not prevent validation. At that time, there was no commit/remote/deployment; that historical state is no longer the current repository state.
 - **16 October pre-commit task:** reported clean installation, typecheck, lint, 3 tests, build and repeat browser checks passing; audit reported 0 vulnerabilities. It recorded owner authorisation for initial GitHub setup but left the push/hosted CI result pending. The live repository/CI verification above resolves that pending evidence without repeating setup.
 
-## Unperformed checks and outstanding decisions
+## Unperformed checks and outstanding decisions — updated 17 October
 
-- No public deployment or deployed journey has been tested. The foundation has no deployment URL recorded.
-- No fresh provider-policy/pricing/licence/storage verification, account/credential use, or live routing request occurred. The 14 October research remains labelled historical in decisions.md.
+- The public homepage/placeholder is verified at [baubled.vercel.app](https://baubled.vercel.app/); the full planning journey does not exist yet and has not been tested.
+- Vercel Hobby policy was checked during preparation; the actual plan, build settings, deployment and billing controls were inspected during verification. Map/directions pricing, licence/storage, credentials and live routing remain unverified; their 14 October research remains historical in decisions.md. No map/directions provider account or credential was used.
 - No cross-browser matrix, physical touch-device or screen-reader audit was performed; viewport checks are not evidence of all devices or assistive technologies.
-- The hosted success cited in the reconciliation record applies to the foundation SHA. The documentation publication's Actions result must be checked for its own commit after pushing; no success is inferred in advance.
+- The reconciliation's hosted success applies to the foundation SHA. The deployed documentation SHA now has separately verified GitHub Actions success, Vercel build/deployment success and public browser/HTTP evidence. These are distinct checks.
 - Provider credential placement, free-plan enforcement/eligibility, permitted data/result use and caching, catalogue ID/status/source conventions, exact URL grammar/length/history policy, and code/dataset licensing remain decisions for scoped future tasks.
 
 ## Documentation publication review — 17 October 2026
@@ -89,10 +91,62 @@ All six intended Markdown files were rendered with GitHub-flavoured Markdown sup
 
 Final corrections record the owner's product approval and publication authorisation, date the earlier foundation HEAD/CI evidence, and distinguish the completed planning review from outstanding deployment work. No product scope or implementation changed. The temporary renderer and HTML previews are outside the repository and are not part of the commit.
 
-The application, tests, manifests, lockfile, configuration and existing evidence images match the foundation commit. The six-file review found no credential patterns or unrelated/generated outputs. The 16 October local application/browser checks remain dated evidence; they were not repeated for these documentation-only corrections. Publication requires a normal push followed by verification of the new commit and its own hosted Actions result, without assuming success in advance.
+The application, tests, manifests, lockfile, configuration and existing evidence images match the foundation commit. The six-file review found no credential patterns or unrelated/generated outputs. The 16 October local application/browser checks remain dated evidence; they were not repeated for those documentation-only corrections. Publication subsequently completed as `d7bbe20`; its outcome is recorded in the current status above.
 
-## Remaining Milestone 1 work — no deployment authorised
+## Deployment preparation — 17 October 2026
 
-The product direction is approved. After documentation publication, the next separately authorised task should verify current Vercel Hobby eligibility/charge prevention and prepare the existing skeleton for its first deployment. The foundation and Git setup do not need rebuilding. Actual account creation, deployment, any necessary configuration change and future commits/pushes still need explicit authorisation; no Milestone 2 feature is started automatically.
+Read AGENTS.md, the product brief, backlog, decisions, progress, source, package scripts, runtime pin and CI configuration. `git log`, `git remote -v` and `git status` confirm the existing canonical project; no foundation or Git setup was repeated. Official Vercel Hobby, pricing, fair-use, Vite, build, npm, Node, Git and project-creation documentation was checked. Current findings and limitations are in [decisions](decisions.md#verified-hosting-recommendation--17-october-2026); the reproducible instructions are in [deployment preparation](deployment.md).
 
-The documentation checkpoint `docs: establish Baubled product plan` and its normal push are authorised for this publication task. Complete Milestone 1 later by recording the actual deployed commit, hosted checks and public browser evidence before proceeding to the integration proof.
+The homepage is ready for an approved first deployment with the prepared dashboard settings. No source/configuration change is needed. It requires no app environment variables, secrets, backend or paid integration. The tracked-file inventory contains no credential files or new unrelated/generated content; this is a scoped repository review, not a forensic secret audit. Source, tests, dependencies, lockfile, configuration and evidence images have no diff against `d7bbe20`.
+
+Fresh local checks used the existing bundled Node **24.19.0** and temporary npm **12.2.0** launcher/cache; no machine-wide runtime or shell configuration was changed.
+
+| Check | Outcome on 17 October |
+| --- | --- |
+| Clean `npm ci` using the temporary cache | Passed: 246 packages; optional `fsevents@2.3.3` install script remained blocked by npm's default policy |
+| `npm run typecheck` | Passed |
+| `npm run lint` | Passed, no warnings |
+| `npm test` | Passed: 1 file, 3 tests |
+| `npm run build` | Passed, including TypeScript; 16 modules; output `dist/` |
+| npm version override | `npx --yes npm@12.2.0 --version` returned 12.2.0 after a sandbox DNS retry |
+| Proposed npm command wrappers | `npx --yes npm@12.2.0 ci` and `npx --yes npm@12.2.0 run build` passed locally with the temporary runtime/cache; hosted execution was unverified at preparation and subsequently passed as recorded below |
+| Development and production browser checks | Passed in the Codex in-app browser at 375×812 and 1280×900; details below |
+| Application/configuration diff against published HEAD | Empty |
+| Documentation checks | Local links/heading anchors, table columns, literal-escape checks and `git diff --check` passed |
+
+Development and preview both showed readable layouts with document widths matching the 375px and 1280px viewports. Keyboard checks in development desktop and preview mobile exposed the skip link with a red 3px outline, focused `#main-content` on Enter, then exposed the CTA with a gold 3px outline and focused `#route-planner` on Enter. Production desktop mouse activation reached the same destination; refresh at the fragment loaded the page. Checked browser logs had no warnings/errors. The mobile planner section and footer remained readable. These were fresh observations, not assumptions from the tests or historical screenshots.
+
+Local dev initially hit sandbox `EPERM`; approved local-server execution allowed dev and preview inspection. A separate npm-wrapper version check initially hit sandbox DNS restrictions and succeeded on retry. Temporary browser tabs were closed, the viewport override reset and both local servers stopped. Generated `dist/` and installed dependencies remain ignored. No new screenshot, dependency, credential or service configuration was added.
+
+Only documentation changed during preparation: this evidence record, the hosting decision in decisions.md, and the new deployment guide. A scoped credential-pattern check found no matches in tracked text, and no root `.env*` files were present. No staging, commit, push, GitHub mutation, Vercel account creation or deployment occurred during preparation. At that handoff, no public URL or hosted runtime had been tested. The later verification below supplies that evidence; physical-device, cross-browser and screen-reader checks remain unperformed.
+
+## Public deployment verification — 17 October 2026
+
+The owner supplied the public URL after initially supplying the private project dashboard. Read-only GitHub API queries, the authenticated Vercel dashboard, public browser checks and separate unauthenticated HTTPS requests established the results below. The full observations, links and limitations are recorded in [deployment and verification](deployment.md#verified-first-deployment--17-october-2026).
+
+| Milestone 1 criterion | Evidence and result |
+| --- | --- |
+| Reproducible checked foundation | Same-day clean install, typecheck, lint, 3 tests, build and local dev/preview checks passed during preparation above. A fresh diff confirms source, tests, manifests, lockfile and config still match HEAD; local checks were not needlessly repeated for this hosted review |
+| Canonical GitHub source / CI | At first-deployment verification, live GitHub main and local HEAD were `d7bbe20562a3865cea696f62488faababfffa8aa`; commit check `validate` was completed / success |
+| Actual production deployment | [Deployment 5K8bEkTubuS4NL6896F661i61GdA](https://vercel.com/ricky-cea5/baubled/5K8bEkTubuS4NL6896F661i61GdA) is Ready / Production and lists `baubled.vercel.app`; source link is the intended SHA. Dashboard timestamp: 17 October 2026, 15:40:28 GMT+1; duration 18s |
+| Hosted build compatibility | Node 24.21.0 satisfies the existing engine range. Saved Vite settings and npm 12.2.0 wrappers match the guide; hosted log shows successful install, TypeScript check and build |
+| Public access and assets | Unauthenticated HTTPS GET returned 200 with no login redirect. Published JS and CSS returned 200 with correct content types; filenames match hosted build output |
+| Desktop/mobile usability | Public browser checks at 1280×900 and 375×812 passed: readable layout, no horizontal overflow, keyboard skip/CTA destinations, visible 3px focus, pointer CTA and refresh; no checked console warnings/errors |
+| €0 configuration | Direct billing inspection confirms Hobby Active, no payment methods, displayed paid add-ons off, AI auto-reload off; project integrations empty, Basic build machine and on-demand concurrent builds disabled |
+| Honest delivered scope | Public copy clearly identifies the planner as coming soon. No app features, dependencies or framework changes were made |
+
+The public browser checks are viewport-based; no physical phone, real touch interaction, cross-browser matrix or screen-reader test was performed. The independent HTTP checks used no cookies or authorisation, so public-access evidence does not depend on the dashboard's authenticated session. Browser viewport overrides were reset and temporary review tabs closed after inspection.
+
+The hosted log contains non-blocking npm warnings about unknown `cache-dir` environment configuration and future npm-major compatibility. No build failure or engine mismatch occurred. Vercel has **No checks configured** for deployment promotion; the current GitHub Actions success was verified separately. Future pushes to `main` can deploy automatically, so approval/review before pushing remains important.
+
+The initial GitHub deployments endpoint returned an empty list; the commit's successful Vercel status and dashboard supplied the actual deployment evidence. Sandbox DNS blocked initial GitHub/HTTPS requests; approved network retries succeeded. The initial dashboard login barrier was resolved during the session. No secrets, billing changes, deployments, new features, staging, commits or pushes were introduced by this verification task.
+
+## Milestone 1 acceptance and publication — 17 October 2026
+
+**Accepted:** the owner explicitly approved Milestone 1 as complete after reviewing the evidence above. No blocking issue was found. The physical-device, cross-browser and screen-reader limitations remain outstanding, and the hosted npm warnings remain non-blocking observations. This acceptance does not claim the full pub-planning product is implemented or approve Milestone 2 work.
+
+The authorised publication contains only docs/deployment.md, docs/decisions.md and this file, with subject `docs: complete Baubled milestone 1 deployment`. The post-push handoff records the resulting SHA, its own GitHub Actions result and Vercel production status; these results cannot be claimed in this pre-publication record. A push may trigger the existing Vercel Git integration; no manual redeployment or settings change is part of this task.
+
+**Recommended first Milestone 2 task, not started:** perform a documentation-only €0 provider gate for MapLibre GL JS with MapTiler Free and openrouteservice. Check current official eligibility, billing/card requirements, quotas and resets, provider-enforced rejection/suspension versus paid overages, browser-key restrictions, attribution/storage terms and ordered 12-stop pedestrian capability. Record dated sources and a pass/fail decision, proposing a safer alternative if any candidate cannot enforce €0. Do not create accounts, obtain keys, install packages or send live routing requests in that first task.
+
+**Learning note:** Vite turns source into static files; Vercel builds a Git commit and serves those files through its production domain. Trace Git SHA → npm install → TypeScript/Vite build → dist assets → browser. Debugging exercise: if CI is green but the public page is old, compare the production deployment's SHA and domain assignment before changing application code. The trade-off is simple static hosting and enforced free limits in exchange for possible quota-related unavailability and provider-managed Node patch updates.

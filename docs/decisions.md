@@ -44,7 +44,7 @@ The following is **owner-supplied historical research dated 14 October 2026**, n
 
 ## Outstanding verification gates
 
-No provider gate below was newly completed on 16 October. Record each future check's date, primary URL, applicable plan/product/version, finding and unresolved limitation. Pre-integration documentation establishes policy and capability; the approved live smoke test during Milestone 2 establishes actual integration behaviour.
+No provider gate below was newly completed on 16 October. The 17 October hosting review now supplies current Hobby policy, account settings, hosted build and public verification evidence. Map/directions gates are still outstanding. Record each future check's date, primary URL, applicable plan/product/version, finding and unresolved limitation. Pre-integration documentation establishes policy and capability; the approved live smoke test during Milestone 2 establishes actual integration behaviour.
 
 | Gate | Required evidence |
 | --- | --- |
@@ -58,10 +58,23 @@ No provider gate below was newly completed on 16 October. Record each future che
 
 If a candidate fails, propose another coherent combination meeting the product and €0 constraints before integrating it. Do not create accounts, use credentials, enable billing, issue live paid requests or deploy infrastructure without explicit owner approval.
 
+## Verified hosting recommendation — 17 October 2026
+
+Retain **Vercel Hobby** for the existing personal, non-commercial homepage. Following the preparation review, the owner connected GitHub and initiated deployment. The subsequent read-only review verified the active Hobby account and the public site at [baubled.vercel.app](https://baubled.vercel.app/). See [deployment and verification](deployment.md) for the source SHA, build evidence, checked account settings and browser results. This current evidence is separate from the historical provider table.
+
+- [Hobby policy](https://vercel.com/docs/plans/hobby) supports the declared project purpose. The [pricing FAQ](https://vercel.com/pricing) says Hobby cannot purchase additional usage; enforced caps can interrupt service instead of generating usage overages. Retain Hobby, the included `vercel.app` domain and no paid additions to preserve €0/month. Plan limits/terms can change and do not guarantee continuous availability.
+- [Native Vite support](https://vercel.com/docs/frameworks/frontend/vite) fits the current static `dist/` build. No repository configuration, plugin, backend, environment variable, secret or SPA rewrite is required for this root page with fragment links.
+- [Node support](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions) is 24.x at major-version granularity. Local/CI Node stays pinned to 24.19.0; the first hosted build printed **24.21.0**, meeting `>=24.19.0 <25`. Retain that requirement and recheck future hosted builds.
+- Use dashboard command overrides to run the existing install/build with npm 12.2.0, following Vercel's [npm override guidance](https://vercel.com/kb/guide/how-do-i-use-the-latest-npm-version-for-my-vercel-deployment). The manifest's `packageManager` alone is not evidence of Vercel's selected npm version. No experimental Corepack setting or new dependency is needed.
+
+The account billing page showed Hobby Active, no payment methods and the displayed paid add-ons disabled; Baubled had no installed integrations. Basic builds and disabled on-demand concurrent builds preserve the intended hosting setup. During first-deployment verification, production and GitHub main both resolved to `d7bbe20562a3865cea696f62488faababfffa8aa`, with successful CI and public browser checks. No enabled chargeable add-on was found in the inspected settings.
+
+**Review: Accepted — 17 October 2026.** The owner approved Milestone 1 as complete on the recorded hosting and validation evidence. Physical-device, cross-browser and screen-reader checks remain **Unverified** and outstanding. The hosted npm `cache-dir` compatibility warnings are non-blocking and recorded rather than suppressed. The verification review did not change Vercel/GitHub settings, create a deployment, commit or push; the owner subsequently authorised the three-file documentation commit/push and verification of its CI/automatic deployment. This decision does not approve future mapping or routing services.
+
 ## Decisions to make in later scoped tasks
 
 - Catalogue ID grammar, availability/retirement values, permitted coordinate sources and endpoint verification records. No venue records are created in this task.
 - Routing result/error types, validation, debounce interval, timeout/retry messaging and credential placement after provider verification.
 - Exact version-1 URL grammar, duplicate-parameter rules, maximum input length, explicit repair choices and push/replace/back/forward policy. Exact order and rejection of silent repair are already requirements; detailed limits and interactions need a focused decision before implementation.
 - Application code licence and dataset/result attribution presentation, treated separately.
-- Hosting account configuration and deployment procedure. The hosted skeleton remains part of Milestone 1 and requires a separately authorised task.
+- Complete a fresh documentation-only €0 eligibility, hard-limit and capability check for the provisional mapping/routing providers before the Milestone 2 integration proof. Accounts, keys, dependencies, live requests and implementation still require scoped approval.
