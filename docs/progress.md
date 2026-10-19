@@ -1,6 +1,52 @@
 # Progress
 
-## Current status — 17 October 2026
+## Current status — 19 October 2026
+
+**Milestone 1 remains Accepted and complete. Milestone 2, Task 1 documentation research is Accepted by the owner following technical review on 19 October 2026. Milestone 2 remains incomplete.** Option B is accepted in principle; detailed architecture, security controls and live integrations remain conditional. No Milestone 2 implementation or live integration is verified. The [dated provider investigation](decisions.md#milestone-2-task-1--provider-verification--19-october-2026) records current official evidence, policy Pass results and remaining Conditional gates. Overall integration-readiness recommendation: **Unverified**.
+
+Initial working tree was clean on `main` at `d2eaa36` (`docs: complete Baubled milestone 1 deployment`); the local tracking ref agreed. Recent history also contained `d7bbe20` and `0293e6d`. No fetch, current remote/CI/deployment audit or external state change was needed. The 17 October records below remain historical evidence. Older README/AGENTS/backlog descriptions of Milestone 1 have not been broadened into this task's edit scope; the owner's current instruction and dated acceptance records establish completion.
+
+Only two files changed:
+
+- `docs/decisions.md`: provider evidence tables and dated primary links; exact quotas, resets, billing enforcement, package/worker and routing contracts; credential/licence/cache findings; comparison of architecture options; owner decisions and future tests.
+- `docs/progress.md`: this task's scope, findings, validation, limits and proposed next step. Existing history is preserved below.
+
+Evidence collected on **2026-10-19**:
+
+- Read AGENTS.md, README, product brief, backlog, decisions, progress, deployment documentation, package/runtime and TypeScript settings before edits; confirmed canonical directory and Git history/status.
+- MapLibre public npm metadata reports **6.15.0** with ESM, bundled types and compatible Node/npm minima. Current docs require WebGL2 and explicit Vite worker wiring. Exact React/Vite/TypeScript integration remains untested.
+- MapTiler Free documents €0-equivalent price, no card, 100k monthly requests for third-party MapLibre, one key, and suspension at limits. One-key development versus production-origin protection remains an owner decision; exact burst limits/quota status codes were not established.
+- HeiGIT's rendered plans and terms establish Standard €0, 2k/day and 40/minute Directions, and enforced errors/blocking. Current FAQ prohibits client-side application keys. Recommend a minimal routing function (Option B, Conditional); direct shared-key routing (Option A) fails. New `api.heigit.org/openrouteservice/v2/…` path and dated migration/CORS announcements were checked.
+- Vercel current policy supports free included hosting/functions and no paid Hobby overages. Existing account evidence is from 17 October; it was not re-audited today. Any WAF activation requires a further review of the actual Hobby controls and cost terms.
+- The ORS plans/terms were empty in text retrieval and were inspected successfully in the browser. The playground overview rendered but its endpoint detail failed; schema was cross-checked against official v9.10.0 source, with current backend docs at 10.0.1. This mismatch is disclosed, not presented as a hosted-version test. The npm web fetch failed; a read-only curl retry after sandbox DNS failure retrieved public package metadata. No package was installed/executed.
+
+Research-stage validation for this documentation-only task:
+
+| Check | Outcome |
+| --- | --- |
+| `git diff --check` | Passed; no whitespace errors |
+| Markdown structure, local targets/anchors and source-link syntax | Passed: two files, 12 tables and 102 links checked for table structure, fences, heading spacing, local targets/anchors and HTTPS syntax. This is structural validation, not a rendered-document or historical external-link audit |
+| Final changed-file and complete diff review | Passed: exactly decisions.md and progress.md; no untracked repository outputs. Earlier decisions content and progress history verified unchanged except relabelling the prior current-status heading as historical |
+| Foundation/dependencies/configuration preservation | Passed: `git diff --exit-code HEAD -- . ':!docs/decisions.md' ':!docs/progress.md'` returned 0; no other tracked changes |
+| `npm ci`, typecheck, lint, tests, build, dev/preview browser checks | **Not run**: the explicit task limits validation to documentation and prohibits package installation; no application/configuration changes |
+| Accounts, credentials, authenticated API calls and live Dublin integration | **Not performed**, as required |
+| Hosted CI / new deployment | **Not performed**; no commit/push/deployment or hosting/billing changes |
+
+Remaining risks: quota-abuse outages despite financial caps; MapTiler one-key/origin isolation; unverified new-account/payment flow after public signup; actual serverless/WAF configuration; browser/device compatibility; current gateway error/header details; and Dublin pedestrian data/entrance correctness. CC BY-SA result obligations and map branding must be preserved; no persistent cache or catalogue source is approved by this research.
+
+**Next proposed task — Milestone 2, Task 2: Provider Architecture and Security Design — requires owner approval, not started.** Settle the one-key map workflow, server-only secret handling, request validation, appropriate €0 abuse controls and a bounded later live-test plan. Account creation, credentials, settings, packages, implementation and deployment require their own explicit scope. Do not advance to fixtures/maps/routing/URL work from this research alone.
+
+### Acceptance and publication preparation — 19 October 2026
+
+The owner accepted Task 1 documentation research following technical review and authorised preparation of only docs/decisions.md and docs/progress.md for publication. Preparation confirmed the canonical directory, branch `main`, HEAD `d2eaa36a7129c7d7861fa69d8b27c28aba8f07b6` and matching local `origin/main` tracking ref. The two accepted documents were the only unstaged changes; nothing was staged or untracked. No remote fetch or live account/settings audit was performed.
+
+Final edits record acceptance, retain Unverified integration readiness and the incomplete milestone, update the decisions document's opening date, and remove a redundant slash from one MapTiler documentation URL. Accepted source-derived findings and historical research/Milestone 1 records remain preserved.
+
+Publication-preparation validation passed: `git diff --check`; structural checks of 31 headings, 12 tables and 102 links (including 12 local targets/anchors); exact comparison of historical decisions and progress against HEAD; comparison of accepted provider evidence against the pre-edit documents, allowing only the approved URL correction; and review of the complete intended two-file diff. A scoped credential-pattern scan and manual review found no secrets or credentials. No other tracked file changed, and nothing is staged or untracked. Application tests, installation, browser checks and fresh external-source verification were not repeated for these documentation-only edits.
+
+Proposed commit checkpoint, pending explicit commit/push approval: `docs: verify zero-cost provider contracts`. The recorded Vercel Git integration is expected to deploy a push to `origin/main` automatically; the existing Validate workflow also runs on pushes without a documentation-path exclusion. These settings have not been re-audited live during preparation. No staging, commit, push, manual deployment or settings change was performed. Publication and verification of the resulting SHA's GitHub Actions and Vercel outcomes remain pending. Task 2 has not begun.
+
+## Status recorded — 17 October 2026
 
 **Milestone 1: Accepted and complete — 17 October 2026.** The owner reviewed and accepted the deployment verification report, explicitly retaining the outstanding physical-device, cross-browser and screen-reader testing limitations. The local React/Vite foundation, GitHub version control, hosted CI and public skeleton at [baubled.vercel.app](https://baubled.vercel.app/) have supporting evidence below. Milestones 2–8 are planned, not implemented.
 
