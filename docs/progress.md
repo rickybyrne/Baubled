@@ -1,5 +1,15 @@
 # Progress
 
+## Offline checkpoint publication authorisation — 5 November 2026
+
+The owner approved publishing the integrated workflow overhaul, accepted Task 2 design and reviewed offline Milestone 2 checkpoint, conditional on a successful final audit. **Milestone 2 remains In progress.** This approval includes the dormant Vercel function and expected automatic main-branch deployment; it does not approve WAF activation, credentials, provider settings, live requests or manual deployment.
+
+Final pre-publication audit of `0684d10984b7d5f529f2061f28280ce4f8594ef1`: `npm run verify` passed lint, **111 tests in six files**, strict TypeScript and production build. The existing MapLibre size warning is unchanged. All 29 changed files belong to the reviewed workflow/design/offline scope. Code-owned ORS and MapTiler release gates remain false; the local adapter is permanently disabled. Client bundle scanning found no server credential name, non-secret build sentinel, provider API URL or synthetic test identity. Credential-pattern scanning and diff checks passed. The currently published homepage at `6c0f076` passed a new public-browser smoke check, including real Tab/Enter skip-link and planner navigation, with no console warnings/errors.
+
+The workflow commit and exact accepted Task 2 bodies are preserved in the integrated history. Canonical Task 2 hashes match the earlier preservation record, with no unrelated local changes. Publication procedure: preserve those exact canonical documents in a separate local branch/commit, return to main, fast-forward only to the reviewed integrated descendant, and push normally to origin/main. No reset, stash, force push or discarded work. Stop if remote main has advanced or any integration discrepancy appears. The final release metadata edits only update current documentation wording; accepted dated research remains intact.
+
+**Hosted results pending at commit time:** this record is not proof of successful GitHub Actions, Vercel deployment or deployed function behaviour. Check each against the final published SHA and report the result in the publication handoff. The existing detailed review and remaining live-integration gates below still apply; publication of an offline checkpoint is not completion of Milestone 2.
+
 ## Offline checkpoint product and technical review — 5 November 2026
 
 **Ready for owner review; not published or accepted as a completed milestone.** Audited the complete integrated branch against published `main` at `6c0f07679e1cd78ec51fc8c95f3ce89bbd3a05ff`: workflow overhaul `5a99900`, accepted Task 2 baseline `ee99cd9`, and offline implementation `52372ee`. A read-only `git ls-remote` confirmed GitHub main still has that published SHA. No push, main merge, deployment, account change or live-provider request occurred.

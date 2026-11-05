@@ -6,7 +6,7 @@ Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: 
 
 ## Current status
 
-As of **5 November 2026**, Milestone 1 remains accepted and deployed at [baubled.vercel.app](https://baubled.vercel.app/). This isolated development branch adds the Milestone 2 offline integration proof: 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration, defensive routing code and deterministic tests. It has not been published. See [deployment evidence](docs/deployment.md) and [current local work](docs/progress.md#milestone-2-autonomous-integration-work--5-november-2026).
+As of **5 November 2026**, Milestone 1 remains accepted and complete. The current checkpoint contains the Milestone 2 offline integration proof: 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration, defensive routing code and deterministic tests. The owner has approved publication to [baubled.vercel.app](https://baubled.vercel.app/) after the final audit. See [historical deployment evidence](docs/deployment.md) and the [publication checkpoint](docs/progress.md#offline-checkpoint-publication-authorisation--5-november-2026); hosted results must be checked against the published SHA.
 
 Milestone 2 is incomplete: Task 1 research is published at `6c0f076`; the accepted Task 2 design is preserved in the integrated local baseline. Option B is accepted in principle. Public WAF activation/live routing remain blocked; actual accounts, pedestrian entrances and live integrations remain unverified. Research acceptance and mocked routes are not milestone completion.
 
