@@ -55,7 +55,7 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
   const share = planSearch(plan.ids, pubs)
   return <div className="integration-proof">
     <p className="status">Integration proof · live services awaiting approval</p>
-    <p className="mt-4">Try an ordered plan with these sourced pub candidates. Building locations still need entrance checks. Walking directions remain disabled while the free-service protection gate is reviewed.</p>
+    <p className="mt-4">Try an ordered plan with these sourced pub locations. Markers identify buildings, not verified doors. Walking directions remain disabled until the approved live integration test.</p>
     <DublinMap pubs={pubs} ids={plan.ids} route={routing.route} />
     <p className="text-sm mt-4">{LOCATION_ATTRIBUTION} <a href={LOCATION_DATASET} className="source-link">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" className="source-link">Licence</a></p>
     {plan.error && <div role="alert" className="feedback"><p>{plan.error} The original URL has been kept.</p><button onClick={clearPlan}>Start an empty plan</button></div>}
@@ -93,6 +93,7 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
         {share && <a className="share-link" href={`${share}#route-planner`}>Open this exact plan</a>}
         <p role="status" className="feedback">{routing.message || (routing.kind === 'ready' ? 'Walking directions match this exact plan.' : plan.ids.length === 1 ? 'One stop — no directions request is needed.' : 'Directions are requested only when you choose “Check walking route”. No automatic retries.')}</p>
         {routing.route && <section aria-label="Walking directions">
+          <p>Directions lead to mapped paths near each pub. Check the actual public entrance on arrival; doorway access has not been verified.</p>
           <h4>Walking estimate</h4><p>{(routing.route.totals.distanceMetres / 1000).toFixed(2)} km · {Math.round(routing.route.totals.durationSeconds / 60)} minutes, excluding pub visits</p>
           {routing.route.legs.map((leg, i) => <details key={`${leg.fromId}-${leg.toId}`}><summary>{i + 1}. {selected[i]!.name} → {selected[i + 1]!.name} · {Math.round(leg.distanceMetres)} m · {Math.round(leg.durationSeconds / 60)} min</summary>
             <ol>{leg.steps.map((step, j) => <li key={j}>{step.instruction} ({Math.round(step.distanceMetres)} m)</li>)}</ol></details>)}

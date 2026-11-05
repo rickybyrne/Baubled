@@ -59,6 +59,8 @@ Start with a small sourced set for integration, then expand to approximately 24 
 
 Use appropriately licensed geographic data and corroborate identity/address details with reliable sources, preferably official venue information or direct observation. Check pedestrian entrances and routing endpoints where practical; document unresolved endpoint concerns and resolve material routing issues before launch. Do not invent venue facts or coordinates, reuse IDs for different venues, or delete retired records needed to explain old links.
 
+Owner clarification, **5 November 2026**: sourced pub/building locations are sufficient for Milestone 2; exact doorway coordinates are not required. Preserve that distinction in provenance and UI. The live proof must still validate the pedestrian route and review nearby snapped endpoints; a building marker is not evidence of a usable door, step-free access or current opening.
+
 Keep dataset licensing and provenance distinct from the code licence. Preserve required map and data attribution. Do not scrape/import ratings, photos, prices, or opening hours without a permitted, justified source.
 
 ## Architecture and reliability contracts

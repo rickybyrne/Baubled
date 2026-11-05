@@ -6,9 +6,9 @@ Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: 
 
 ## Current status
 
-As of **5 November 2026**, Milestone 1 remains accepted and complete. The current checkpoint contains the Milestone 2 offline integration proof: 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration, defensive routing code and deterministic tests. The owner has approved publication to [baubled.vercel.app](https://baubled.vercel.app/) after the final audit. See [historical deployment evidence](docs/deployment.md) and the [publication checkpoint](docs/progress.md#offline-checkpoint-publication-authorisation--5-november-2026); hosted results must be checked against the published SHA.
+As of **5 November 2026**, Milestone 1 remains accepted and complete. The offline Milestone 2 checkpoint and Node ESM correction are published through `bf98cb4` at [baubled.vercel.app](https://baubled.vercel.app/), with successful exact-SHA Actions, automatic Vercel deployment and controlled disabled-endpoint verification. The interface has 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration. See the [current evidence and working plan](docs/progress.md#milestone-2-live-integration-execution--5-november-2026).
 
-Milestone 2 is incomplete: Task 1 research is published at `6c0f076`; the accepted Task 2 design is preserved in the integrated local baseline. Option B is accepted in principle. Public WAF activation/live routing remain blocked; actual accounts, pedestrian entrances and live integrations remain unverified. Research acceptance and mocked routes are not milestone completion.
+Milestone 2 is incomplete. The owner approved a simpler free-plan protection policy without metered WAF rate limiting, and sourced building locations rather than surveyed doors. Local preparation adds bounded map loading/attribution and best-effort warm-instance routing limits; these are not global abuse limits. Actual accounts, approved live calls and deployed integration remain unverified. Research acceptance and mocked routes are not milestone completion.
 
 The default page runs without accounts, keys or external runtime requests. The map has no street tiles; its approximate building markers are not entrance-verified. Production and local routing entry points are closed, even if environment variables are accidentally supplied. Operating budget: **€0/month**.
 
@@ -67,7 +67,9 @@ Safe local feature-branch commits are allowed within the approved objective. Pus
 
 - `src/App.tsx`, `src/IntegrationPlanner.tsx`: introduction and small integration-proof interface.
 - `src/DublinMap.tsx`: contained MapLibre canvas, markers, route layer and fallback.
-- `shared/catalogue.ts`: 12 sourced candidate identities/coordinates with provenance and entrance gates.
+- `shared/catalogue.ts`: 12 sourced identities/building coordinates with provenance and explicit unverified-entrance metadata.
+- `src/map-transport.ts`, `src/live-map-config.ts`: bounded dormant MapTiler loading and the closed map release gate.
+- `server/routing-budget.ts`: per-instance attempt/concurrency limits and quota/auth cooldowns; not a shared quota guarantee.
 - `shared/route.ts`, `shared/route-url.ts`: route validation/normalisation and basic versioned URL contract.
 - `api/walking-route.ts`, `server/walking-route.ts`: release-blocked entry point and tested server boundary.
 - `server/local-api.ts`: disabled-only loopback adapter used by Vite dev/preview; never reads a credential.

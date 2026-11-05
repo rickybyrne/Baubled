@@ -46,10 +46,14 @@ describe('walking response boundary', () => {
     expect(() => validateRoute(result, [...result.pubIds].reverse(), 'test')).toThrow()
     expect(() => validateRoute(result, result.pubIds, 'stale')).toThrow()
   })
-  it('keeps actual entrance-unverified data out of live routing', () => {
+  it('requires sourced coordinates without mislabelling building points as verified entrances', () => {
     expect(routingCatalogueReady(testPubs)).toBe(true)
-    expect(routingCatalogueReady(PUBS)).toBe(false)
+    expect(routingCatalogueReady(PUBS)).toBe(true)
+    expect(PUBS.every(pub => !pub.entranceVerified)).toBe(true)
     expect(routingCatalogueReady([...testPubs, testPubs[0]!])).toBe(false)
+    expect(routingCatalogueReady(testPubs.map(pub => ({ ...pub, coordinateSource: null })))).toBe(false)
+    expect(routingCatalogueReady(testPubs.map(pub => ({ ...pub, coordinateLicence: '' })))).toBe(false)
+    expect(routingCatalogueReady(testPubs.map(pub => ({ ...pub, position: null })))).toBe(false)
   })
 })
 

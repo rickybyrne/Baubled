@@ -10,7 +10,7 @@ describe('Baubled foundation', () => {
     const planner = screen.getByRole('region', { name: /your evening, in your order/i })
     expect(within(planner).getByText('Integration proof · live services awaiting approval')).toBeVisible()
     expect(within(planner).getByText(/walking directions remain disabled/i)).toBeVisible()
-    expect(within(planner).getByText('The association between this building record and Grand Central still needs review.')).toBeVisible()
+    expect(within(planner).getByText(/Its pedestrian entrance coordinate still needs verification/)).toBeVisible()
   })
 
   it('links the primary CTA to the actual planner section', () => {

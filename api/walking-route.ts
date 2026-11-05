@@ -4,10 +4,10 @@ import { createWalkingHandler } from '../server/walking-route.js'
 // Release gate: change only after the owner accepts financial/enforcement evidence.
 // An accidentally configured environment variable alone cannot open this endpoint.
 const PUBLIC_ROUTING_APPROVED = false
+// Retain the handler's defensive counters across requests in one warm instance.
+const handler = createWalkingHandler({ enabled: PUBLIC_ROUTING_APPROVED && process.env.ROUTING_ENABLED === 'true',
+  environment: process.env.VERCEL_ENV, apiKey: process.env.ORS_API_KEY,
+  origin: 'https://baubled.vercel.app', pubs: PUBS, revision: CATALOGUE_REVISION })
 export default {
-  fetch(request: Request) {
-    return createWalkingHandler({ enabled: PUBLIC_ROUTING_APPROVED && process.env.ROUTING_ENABLED === 'true',
-      environment: process.env.VERCEL_ENV, apiKey: process.env.ORS_API_KEY,
-      origin: 'https://baubled.vercel.app', pubs: PUBS, revision: CATALOGUE_REVISION })(request)
-  },
+  fetch: handler,
 }

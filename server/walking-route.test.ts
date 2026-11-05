@@ -18,6 +18,23 @@ function setup(overrides: Partial<Parameters<typeof createWalkingHandler>[0]> = 
 }
 afterEach(() => { vi.useRealTimers(); vi.unstubAllEnvs() })
 describe('routing handler', () => {
+  it('does not repeatedly call an exhausted or unauthorised provider from one warm handler', async () => {
+    const { handler, fetcher } = setup()
+    fetcher.mockResolvedValue(new Response('gateway detail', { status: 403 }))
+    expect((await handler(request())).status).toBe(503)
+    expect((await handler(request())).status).toBe(503)
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
+  it('keeps invalid requests outside the upstream attempt allowance', async () => {
+    const { handler, fetcher } = setup()
+    for (let i = 0; i < 10; i++) expect((await handler(request({ pubIds: [] }))).status).toBe(422)
+    for (let i = 0; i < 6; i++) {
+      fetcher.mockResolvedValueOnce(Response.json(orsFixture()))
+      expect((await handler(request())).status).toBe(200)
+    }
+    expect((await handler(request())).status).toBe(503)
+    expect(fetcher).toHaveBeenCalledTimes(6)
+  })
   it('makes one fixed ordered request and returns only validated safe fields', async () => {
     const { handler, fetcher } = setup()
     const response = await handler(request())
@@ -63,7 +80,7 @@ describe('routing handler', () => {
     expect(fetcher).not.toHaveBeenCalled()
   })
   it.each([{ enabled: false }, { environment: 'preview' }, { apiKey: '' }, { pubs: [] },
-    { pubs: testPubs.map(pub => ({ ...pub, entranceVerified: false })) }])('fails closed for %j', async overrides => {
+    { pubs: testPubs.map(pub => ({ ...pub, coordinateSource: null })) }])('fails closed for %j', async overrides => {
     const { handler, fetcher } = setup(overrides)
     expect((await handler(request())).status).toBe(503)
     expect(fetcher).not.toHaveBeenCalled()

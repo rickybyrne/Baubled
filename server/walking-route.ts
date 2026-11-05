@@ -1,5 +1,6 @@
 import { routingCatalogueReady, validateIds, type Pub } from '../shared/catalogue.js'
 import { normaliseOrs, object } from '../shared/route.js'
+import { createRoutingBudget } from './routing-budget.js'
 
 export const ORS_URL = 'https://api.heigit.org/openrouteservice/v2/directions/foot-walking/geojson'
 const RESPONSE_LIMIT = 2 * 1024 * 1024
@@ -69,7 +70,9 @@ async function readJson(body: ReadableStream<Uint8Array> | null, limit: number, 
 }
 
 export function createWalkingHandler(options: Options): (request: Request) => Promise<Response> {
+  const budget = createRoutingBudget()
   return async request => {
+    let release: (() => void) | null = null
     try {
       if (request.method !== 'POST') {
         const response = json({ error: { code: 'METHOD_NOT_ALLOWED', message: 'Use POST.' } }, 405, { Allow: 'POST' })
@@ -98,6 +101,9 @@ export function createWalkingHandler(options: Options): (request: Request) => Pr
       let ids: string[]
       try { ids = validateIds(body.pubIds, options.pubs, 2) } catch { failure(422, 'INVALID_ROUTE', 'Choose 2–12 unique, active pub IDs.') }
       const selected = ids.map(id => options.pubs.find(pub => pub.id === id)!)
+      if (request.signal.aborted) failure(408, 'REQUEST_CANCELLED', 'The request was cancelled.')
+      release = budget.enter()
+      if (!release) failure(503, 'ROUTING_BUSY', 'Walking directions are busy. Try again later; your stops are unchanged.')
       const route = await bounded(async signal => {
         let upstream: Response
         try {
@@ -106,6 +112,7 @@ export function createWalkingHandler(options: Options): (request: Request) => Pr
             body: JSON.stringify({ coordinates: selected.map(pub => pub.position), instructions: true,
               instructions_format: 'text', language: 'en', units: 'm' }) })
         } catch { failure(502, 'ROUTING_SERVICE_ERROR', 'The walking service could not be reached. Your stops are unchanged.') }
+        budget.observe(upstream)
         let payload: unknown
         try {
           const contentType = upstream.headers.get('content-type')?.split(';')[0]?.trim().toLowerCase()
@@ -136,6 +143,6 @@ export function createWalkingHandler(options: Options): (request: Request) => Pr
       // No provider bodies, credentials, stack traces or arbitrary messages in output/logs.
       const safe = error instanceof Failure ? error : new Failure(500, 'ROUTING_ERROR', 'Walking directions are unavailable. Your stops are unchanged.')
       return json({ error: { code: safe.code, message: safe.message } }, safe.status)
-    }
+    } finally { release?.() }
   }
 }

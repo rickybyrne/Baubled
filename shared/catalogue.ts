@@ -15,17 +15,18 @@ export interface Pub {
   locationNote?: string
 }
 
-export const CATALOGUE_REVISION = 'dublin-proof-2026-11-05'
+export const CATALOGUE_REVISION = 'dublin-building-proof-2026-11-05'
 export const LOCATION_DATASET = 'https://data.gov.ie/dataset/national-inventory-of-architectural-heritage-niah-national-dataset'
 export const LOCATION_ATTRIBUTION = 'Pub location data © Government of Ireland, National Inventory of Architectural Heritage, CC BY 4.0. Selected records; venue names and addresses checked against official websites on 5 November 2026.'
-// Published building centroids, NOT entrance coordinates. All remain blocked for routing.
+// Published building centroids, NOT entrance coordinates. Owner approved these as
+// proof waypoints on 2026-11-05; live pedestrian snapping still needs verification.
 // Source: national CSV snapshot dated 2023-10-11, retrieved 2026-11-05; see decisions.
 export const PUBS: readonly Pub[] = [
   { id: 'p001', name: 'Molloy’s', address: '59 Talbot Street, Dublin', position: [-6.251356, 53.351109], coordinateRecord: '50010141', identitySource: 'https://www.molloysdublin.com/contact-us' },
   { id: 'p002', name: 'The Confession Box', address: '88 Marlborough Street, Dublin', position: [-6.258411, 53.350327], coordinateRecord: '50010241', identitySource: 'https://theconfessionbox.ie/' },
   { id: 'p003', name: 'Madigan’s Earl Street', address: '25 North Earl Street, Dublin', position: [-6.259301, 53.350061], coordinateRecord: '50010252', identitySource: 'https://www.madigansearlst.com/contact-us' },
   { id: 'p004', name: 'Madigan’s O’Connell Street', address: '19 O’Connell Street, Dublin', position: [-6.260547, 53.351414], coordinateRecord: '50010548', identitySource: 'https://www.madigansdublin.com/location-contact-us' },
-  { id: 'p005', name: 'Grand Central', address: '10–11 O’Connell Street, Dublin', position: [-6.259180, 53.348326], coordinateRecord: '50010275', identitySource: 'https://grandcentral.ie/', locationNote: 'The association between this building record and Grand Central still needs review.' },
+  { id: 'p005', name: 'Grand Central', address: '10–11 O’Connell Street, Dublin', position: [-6.259180, 53.348326], coordinateRecord: '50010275', identitySource: 'https://grandcentral.ie/', locationNote: 'The venue’s published history corroborates this former bank building. Its pedestrian entrance coordinate still needs verification.' },
   { id: 'p006', name: 'The Oval', address: '78 Middle Abbey Street, Dublin', position: [-6.260283, 53.348441], coordinateRecord: '50010405', identitySource: 'https://theovalbar.com/contact/' },
   { id: 'p007', name: 'The Lotts Café Bar', address: '9 Lower Liffey Street, Dublin', position: [-6.263322, 53.347363], coordinateRecord: '50010373', identitySource: 'https://www.thelottscafebar.com/contact/' },
   { id: 'p008', name: 'T.P. Smith’s', address: '9–10 Jervis Street, Dublin', position: [-6.266008, 53.347480], coordinateRecord: '50010411', identitySource: 'https://tpsmiths.ie/' },
@@ -57,6 +58,6 @@ export function routingCatalogueReady(pubs: readonly Pub[]): boolean {
   return pubs.length > 0 && new Set(pubs.map(pub => pub.id)).size === pubs.length &&
     pubs.every(pub => /^p[0-9]{3}$/.test(pub.id) && pub.name && pub.address &&
       pub.identitySource.startsWith('https://') && /^\d{4}-\d{2}-\d{2}$/.test(pub.checkedOn) &&
-      (pub.status === 'retired' || (validPosition(pub.position) && pub.entranceVerified &&
+      (pub.status === 'retired' || (validPosition(pub.position) &&
         pub.coordinateSource?.startsWith('https://') && Boolean(pub.coordinateLicence))))
 }

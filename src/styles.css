@@ -74,7 +74,9 @@ input[type="text"], input:not([type]) { display: block; width: 100%; min-height:
 .proof-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
 .feedback { margin-block: 1rem; padding: .8rem; border-left: 3px solid var(--color-red); background: #dfbd7733; overflow-wrap: anywhere; }
 .share-link { display: inline-flex; align-items: center; text-decoration: underline; }
-.map-panel { margin-top: 2rem; border: 1px solid #173e3555; border-radius: .5rem; overflow: hidden; }
+.map-panel { position: relative; margin-top: 2rem; border: 1px solid #173e3555; border-radius: .5rem; overflow: hidden; }
+.maptiler-logo { position: absolute; top: 266px; left: 10px; display: flex; align-items: center; min-height: 44px; padding: 4px; background: #faf4e8ee; }
+@media (min-width: 47.01rem) { .maptiler-logo { top: 306px; } }
 .map-canvas { height: 360px; }
 .map-note, .map-credits { padding: .75rem 1rem; font-size: .85rem; }
 .map-credits a { text-decoration: underline; display: inline-flex; align-items: center; min-height: 44px; }
