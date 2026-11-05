@@ -1,14 +1,15 @@
 import { render, screen, within } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import App from './App'
+vi.mock('./DublinMap', () => ({ default: () => <p>Offline map</p> }))
 
 describe('Baubled foundation', () => {
   it('introduces the project and honestly describes the planner destination', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: /a little dublin.*a little festive/i })).toBeVisible()
     const planner = screen.getByRole('region', { name: /your evening, in your order/i })
-    expect(within(planner).getByText('Planner coming soon')).toBeVisible()
-    expect(within(planner).getByText(/no route can be created yet/i)).toBeVisible()
+    expect(within(planner).getByText('Integration proof · live services awaiting approval')).toBeVisible()
+    expect(within(planner).getByText(/walking directions remain disabled/i)).toBeVisible()
   })
 
   it('links the primary CTA to the actual planner section', () => {

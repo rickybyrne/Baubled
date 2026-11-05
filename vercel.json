@@ -1,0 +1,5 @@
+{
+  "functions": {
+    "api/walking-route.ts": { "maxDuration": 15, "supportsCancellation": true }
+  }
+}

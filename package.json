@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "engines": { "node": ">=24.19.0 <25", "npm": ">=12 <13" },
+  "engines": {
+    "node": ">=24.19.0 <25",
+    "npm": ">=12 <13"
+  },
   "packageManager": "npm@12.2.0",
   "scripts": {
     "dev": "vite",
@@ -14,7 +17,11 @@
     "build": "npm run typecheck && vite build",
     "preview": "vite preview"
   },
-  "dependencies": { "react": "19.3.1", "react-dom": "19.3.1" },
+  "dependencies": {
+    "maplibre-gl": "6.15.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@tailwindcss/vite": "4.3.3",

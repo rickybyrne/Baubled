@@ -17,7 +17,7 @@ Plan established 16 October 2026; overall product direction approved by the owne
 
 ## Milestone 2 — Integration proof
 
-**Status: In progress.** Task 1 provider research is accepted and published at `6c0f076`; Task 2 architecture/security design is accepted following technical review on 5 November 2026, with separate publication pending in the canonical checkout. Public WAF activation/live routing remain blocked on Hobby financial/enforcement clarification. The next development objective is a focused financial-gate investigation, not integration implementation. None of the product work below is authorised by the workflow overhaul.
+**Status: In progress.** Task 1 provider research is accepted and published at `6c0f076`; Task 2 design was accepted on 5 November 2026. The owner subsequently authorised coherent, isolated Milestone 2 execution. The workflow commit and accepted Task 2 documents are integrated locally on `codex/milestone-2-integration`; the canonical checkout and unpublished documents remain preserved. Offline implementation and deterministic verification are ready for owner review. Public WAF activation/live routing remain blocked on Hobby financial/enforcement clarification; publication and deployed/live proof require explicit approval. See the [current working plan](progress.md#milestone-2-autonomous-integration-work--5-november-2026).
 
 - **Objective:** expose provider, budget, and URL recovery risks before substantial UI polish.
 - **Deliverables:** a Dublin map, controlled verified pub fixtures, an ordered walking request up to 12 stops, real geometry/instructions/per-leg metrics, basic versioned URL recovery, attribution, and visible failure behaviour. Prove that the list remains usable if mapping fails.

@@ -15,7 +15,7 @@ Inspect Git status, current task requirements and relevant source before editing
 - [Progress](docs/progress.md): implementation status and dated verification evidence.
 - [Deployment](docs/deployment.md): production configuration and deployed evidence.
 
-Milestone 1 is accepted and deployed; the application is still a homepage/planner skeleton. Accepted research is not implemented functionality. Roadmap entries are not authorisation. Current owner instructions take precedence over older task-specific restrictions; preserve dated reports as history.
+Milestone 1 is accepted and deployed. This isolated branch contains the authorised Milestone 2 offline integration proof; live providers, pedestrian entrances and deployed acceptance remain unverified. Read current progress before continuing. Roadmap entries are not authorisation. Current owner instructions take precedence over older task-specific restrictions; preserve dated reports as history.
 
 ## Own the approved outcome
 

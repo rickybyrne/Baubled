@@ -6,11 +6,11 @@ Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: 
 
 ## Current status
 
-As of **5 November 2026**, Milestone 1 is accepted, published and deployed at [baubled.vercel.app](https://baubled.vercel.app/). The application contains a responsive introduction, a working “Plan your route” anchor and an honest planner placeholder. Pub selection, maps, walking directions and sharing are not implemented. See [deployment evidence](docs/deployment.md) and [latest local verification](docs/progress.md#development-workflow-overhaul--5-november-2026) for checks and limitations.
+As of **5 November 2026**, Milestone 1 remains accepted and deployed at [baubled.vercel.app](https://baubled.vercel.app/). This isolated development branch adds the Milestone 2 offline integration proof: 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration, defensive routing code and deterministic tests. It has not been published. See [deployment evidence](docs/deployment.md) and [current local work](docs/progress.md#milestone-2-autonomous-integration-work--5-november-2026).
 
-Milestone 2 is in progress: Task 1 research is published at `6c0f076`; Task 2 design was accepted on 5 November, with its separate publication still pending. Option B is accepted in principle. Public WAF activation and live routing remain blocked by the Hobby financial/enforcement gate; accounts and integrations remain unverified. This workflow branch does not include the unpublished Task 2 changes.
+Milestone 2 is incomplete: Task 1 research is published at `6c0f076`; the accepted Task 2 design is preserved in the integrated local baseline. Option B is accepted in principle. Public WAF activation/live routing remain blocked; actual accounts, pedestrian entrances and live integrations remain unverified. Research acceptance and mocked routes are not milestone completion.
 
-The page runs without accounts, API keys, external fonts, or external runtime services. Operating budget: **€0/month**.
+The default page runs without accounts, keys or external runtime requests. The map has no street tiles; its approximate building markers are not entrance-verified. Production and local routing entry points are closed, even if environment variables are accidentally supplied. Operating budget: **€0/month**.
 
 ## Local setup
 
@@ -50,7 +50,7 @@ Use focused tests/static checks during iteration, then `npm run verify` for comp
 Use the Codex in-app browser when available, or a normal local browser. Start a loopback-only dev server with `npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`. After `npm run verify`, start production preview separately with `npm run preview -- --host 127.0.0.1 --port 4173 --strictPort`. If a port is occupied, inspect the owner or select another explicit port; do not kill unrelated processes. Stop task-owned servers after checking.
 
 1. Inspect both servers at **375×812** and **1280×900**. Check readable content, existing colours/type/spacing, no horizontal overflow and interactive targets at least 44px. Compare affected UI with the established design, not just test output.
-2. On a fresh root-page load, Tab to the visible skip link and Enter to focus main content. Tab to **Plan your route**, verify visible focus and Enter to reach `#route-planner`. Check pointer activation and refresh at `/` and `/#route-planner`; the current planner must still say it is coming soon.
+2. On a fresh root-page load, Tab to the visible skip link and Enter to focus main content. Tab to **Plan your route**, verify visible focus and Enter to reach `#route-planner`. Check one stop (no routing request), 12-stop exact order, invalid-input feedback, share/refresh restoration and the disabled-routing response. The page must clearly distinguish the offline proof from live directions.
 3. Clear/inspect console and network observations around the actual journey. Record unexpected errors and failed assets. Use keyboard events and rendered/accessibility observations; programmatic focus alone does not prove keyboard navigation.
 4. For future affected features, inspect empty/loading/error states, accessible names, focus after updates and reduced-motion behaviour. Use deterministic provider mocks; routine checks must not contact MapTiler or ORS.
 5. Record browser, server mode, viewport, actions and results. Distinguish actual visual/keyboard checks from source inspection. If media emulation, a physical phone, screen reader or another browser was unavailable, state that limitation.
@@ -65,13 +65,18 @@ Safe local feature-branch commits are allowed within the approved objective. Pus
 
 ## Structure
 
-- `src/App.tsx`: root page and planner placeholder.
+- `src/App.tsx`, `src/IntegrationPlanner.tsx`: introduction and small integration-proof interface.
+- `src/DublinMap.tsx`: contained MapLibre canvas, markers, route layer and fallback.
+- `shared/catalogue.ts`: 12 sourced candidate identities/coordinates with provenance and entrance gates.
+- `shared/route.ts`, `shared/route-url.ts`: route validation/normalisation and basic versioned URL contract.
+- `api/walking-route.ts`, `server/walking-route.ts`: release-blocked entry point and tested server boundary.
+- `server/local-api.ts`: disabled-only loopback adapter used by Vite dev/preview; never reads a credential.
 - `src/styles.css`: Tailwind theme, page styles, and focus foundation.
-- `src/App.test.tsx`: page, CTA destination, and skip-link contracts.
+- Tests beside the modules: deterministic provider, lifecycle, error, URL and UI behaviour; synthetic geographic data is confined to test helpers.
 - `vite.config.ts`, `tsconfig.json`, `eslint.config.js`: development checks.
 - [Authoritative product brief and launch contracts](docs/product-brief.md).
 - [Eight-milestone backlog and review workflow](docs/backlog.md).
 - [Architecture decisions and provider verification gates](docs/decisions.md).
 - [Progress and validation evidence](docs/progress.md).
 
-The accepted architecture direction is MapLibre/MapTiler in the browser and a minimal Vercel Node function holding the ORS key server-side. Vercel hosts the skeleton; map/routing providers are not integrated. Keep the documented security, licensing and financial gates before implementation. No provider credentials are needed to develop or verify the current skeleton.
+The accepted architecture is MapLibre/MapTiler in the browser and one Vercel Node function holding the ORS key server-side. The code-owned live release gates remain false. Do not flip them or configure credentials as a setup shortcut. `ORS_API_KEY` must never use a `VITE_` prefix or enter a browser build, Preview or CI. MapTiler's future `VITE_MAPTILER_KEY` is public and must follow the accepted single-key/origin workflow. The local adapter always returns a disabled-service response; ordinary tests inject synthetic responses directly, without invoking a provider. Vite's static build does not prove Vercel function packaging or deployment.
