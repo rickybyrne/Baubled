@@ -1,4 +1,4 @@
-import { validPosition, type Position, type Pub } from './catalogue.ts'
+import { validPosition, type Position, type Pub } from './catalogue.js'
 
 export const ROUTE_ATTRIBUTION = 'Directions: openrouteservice / HeiGIT; © OpenStreetMap contributors, CC BY-SA 4.0. Reformatted by Baubled.'
 export interface Step {

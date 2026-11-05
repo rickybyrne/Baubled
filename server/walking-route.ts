@@ -1,5 +1,5 @@
-import { routingCatalogueReady, validateIds, type Pub } from '../shared/catalogue.ts'
-import { normaliseOrs, object } from '../shared/route.ts'
+import { routingCatalogueReady, validateIds, type Pub } from '../shared/catalogue.js'
+import { normaliseOrs, object } from '../shared/route.js'
 
 export const ORS_URL = 'https://api.heigit.org/openrouteservice/v2/directions/foot-walking/geojson'
 const RESPONSE_LIMIT = 2 * 1024 * 1024

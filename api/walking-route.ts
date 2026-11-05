@@ -1,5 +1,5 @@
-import { PUBS, CATALOGUE_REVISION } from '../shared/catalogue'
-import { createWalkingHandler } from '../server/walking-route'
+import { PUBS, CATALOGUE_REVISION } from '../shared/catalogue.js'
+import { createWalkingHandler } from '../server/walking-route.js'
 
 // Release gate: change only after the owner accepts financial/enforcement evidence.
 // An accidentally configured environment variable alone cannot open this endpoint.
