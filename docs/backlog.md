@@ -1,10 +1,10 @@
 # Development backlog
 
-Plan established 16 October 2026; overall product direction approved by the owner on 17 October. [Product brief](product-brief.md) owns launch requirements; [decisions](decisions.md) owns technical choices; [progress](progress.md) records verified status. Milestones are gates, not instructions to implement everything at once. The documentation checkpoint is authorised for publication; future commit subjects are suggestions only and require explicit owner authorisation.
+Plan established 16 October 2026; overall product direction approved by the owner on 17 October. [Product brief](product-brief.md) owns launch requirements; [decisions](decisions.md) owns technical choices; [progress](progress.md) records dated evidence. Milestones describe dependencies and acceptance gates, not permission to implement everything. The owner approves a coherent outcome; Codex owns its routine engineering execution. The [workflow below](#task-and-review-workflow), revised 5 November 2026, governs local commits and publication approval.
 
 ## Milestone 1 — Foundation and hosted skeleton
 
-**Status:** in progress. The local foundation is already committed and pushed as `0293e6da409815bc894c98fad5c0f676b2037e7e`; its hosted Validate workflow passed. Do not repeat scaffolding or Git setup. Public deployment and its verification remain outstanding.
+**Status: Accepted, complete and deployed.** The foundation at `0293e6da409815bc894c98fad5c0f676b2037e7e` and subsequent hosted skeleton have [deployment evidence](deployment.md); acceptance/publication is recorded in [progress](progress.md#milestone-1-acceptance-and-publication--17-october-2026). Do not repeat scaffolding, Git setup or deployment preparation. The original checklist below is retained as the milestone's acceptance history, not outstanding work.
 
 - **Objective:** establish a reproducible, accessible, version-controlled skeleton with a verified public deployment.
 - **Deliverables:** preserve the React/Vite homepage and planner placeholder, strict TypeScript/Tailwind, focused tests, lint/build scripts, CI, and current documentation. Complete hosted skeleton verification in a separately approved task.
@@ -16,6 +16,8 @@ Plan established 16 October 2026; overall product direction approved by the owne
 - **Commit checkpoints:** existing `feat: initialise Baubled application foundation`; authorised `docs: establish Baubled product plan`; later `docs: record verified skeleton deployment` (include configuration only if actually required).
 
 ## Milestone 2 — Integration proof
+
+**Status: In progress.** Task 1 provider research is accepted and published at `6c0f076`; Task 2 architecture/security design is accepted following technical review on 5 November 2026, with separate publication pending in the canonical checkout. Public WAF activation/live routing remain blocked on Hobby financial/enforcement clarification. The next development objective is a focused financial-gate investigation, not integration implementation. None of the product work below is authorised by the workflow overhaul.
 
 - **Objective:** expose provider, budget, and URL recovery risks before substantial UI polish.
 - **Deliverables:** a Dublin map, controlled verified pub fixtures, an ordered walking request up to 12 stops, real geometry/instructions/per-leg metrics, basic versioned URL recovery, attribution, and visible failure behaviour. Prove that the list remains usable if mapping fails.
@@ -94,10 +96,30 @@ Plan established 16 October 2026; overall product direction approved by the owne
 
 ## Task and review workflow
 
-Each future implementation prompt contains one immediate objective and necessary context; instructions to inspect AGENTS.md, relevant docs, actual code/dependencies/tests and Git status; precise behaviour and exclusions; preservation requirements; technical/data contracts; observable acceptance including failures; appropriate automated/manual checks; and a handoff reporting files/reasons, commands/results, unperformed checks, limitations and a suggested commit checkpoint.
+### Approve an outcome
 
-Use focused changes and existing conventions; do not invent files/components, refactor unrelated work, install speculative dependencies, or weaken meaningful tests. Use deterministic mocked provider responses for routine checks and a separate approved deployed live smoke test. Review relevant code/diffs, record what was not inspected, and request only evidence missing for the decision.
+A request normally supplies the user outcome, relevant UX/behaviour, constraints and non-goals, observable acceptance criteria, and any consequential decisions reserved for the owner. A detailed human-authored implementation plan is unnecessary. Interpret criteria as behaviours to demonstrate, including relevant failures; clarify material conflicts while continuing independent safe work. Existing product/provider gates still apply.
 
-Classify each result **Accepted**, **Needs correction**, or **Unverified**. Await owner observations and review before advancing dependent work. When correction is needed, prepare one focused correction task. Completing a task does not automatically complete its milestone or authorise accounts, credentials, commits, pushes, deployment, or the next feature.
+### Execute and verify
 
-After each accepted milestone, add a short learning note: central concept, implementation data flow, one debugging/prediction exercise and the key interview trade-off. Launch claims must trace to implemented features or measured evidence.
+Codex inspects the relevant repository context, makes a short working plan, implements the complete approved outcome, adds meaningful tests, checks the affected journeys and fixes in-scope failures. Related subparts and corrections do not need separate prompts or approval. Reuse existing modules/styles; do not expand product scope or introduce speculative infrastructure.
+
+Use the proportionate checks in [AGENTS](../AGENTS.md#verify-and-hand-off) and the [README browser procedure](../README.md#browser-verification). A fresh checkout needs `npm ci`; the shared full check is `npm run verify`. Documentation-only changes need documentation checks. Broaden testing when the risk or evidence warrants it, not as a ritual after every edit. Test provider failures with deterministic mocks; live tests require a separately approved budget and configuration.
+
+Stop only for a genuine unmet requirement, material product/security/cost decision, missing essential data/tool or protected operation. Explain the evidence, recommended resolution and minimum owner decision. Do not hand back ordinary implementation errors without attempting in-scope correction.
+
+### Review and publish
+
+The handoff covers **Delivered, Changed, Verified, Decisions, Limitations and Review**: the completed outcome, meaningful files, actual checks, consequential choices, remaining uncertainty and what the owner should inspect or approve. Use concise links/diffs rather than repeating full research. Distinguish ready for review from owner **Accepted**, known defects from **Needs correction**, and unperformed checks from **Unverified**.
+
+Local commits containing only approved task work on a safe feature branch/worktree are allowed. Keep unrelated unpublished changes separate, stage explicit files, and review the complete commit. Pushes to any remote, merges into `main`, and production/preview deployments need explicit owner approval. Explain automatic deployment consequences before requesting publication; an approved push does not authorise manual redeployment or service settings changes. Verify hosted CI and any deployment against the exact published SHA, with public smoke evidence and honest limitations. Never rewrite history or erase user work to simplify publication.
+
+After meaningful work, record delivered behaviour, consequential decisions, verification, unresolved gates and next action in the existing progress/decisions documents. Keep dated research and milestone evidence intact; Git retains fine-grained edit history. Update current summaries when status changes. Owner acceptance of one outcome does not start the next milestone or clear provider/financial gates. No copy-and-paste relay between ChatGPT and Codex is required for routine execution.
+
+### Codex capabilities without extra process
+
+Use the local terminal, browser and review panel immediately. Prefer one primary implementation agent; use a worktree when it protects unrelated work or isolates an independent feature, not for every small edit. Give parallel agents independent responsibilities and explicit file ownership; read-only audits are useful alongside implementation. Review integration and combined checks before combining changes. The app's [worktree guidance](https://learn.chatgpt.com/docs/environments/git-worktrees) describes isolated checkouts with shared Git metadata; it does not authorise merges.
+
+For substantial work with an uncertain path, the owner can explicitly request a persistent [Codex Goal](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex) with a measurable finish line, verification, scope and blocked stop condition. A Goal does not override approvals. A normal feature request is sufficient otherwise; no Goal is required or activated by this workflow.
+
+Skills and scheduled-task tools are available in the current desktop environment, but no project-specific skill or automation is needed yet. Consider a skill only after a repeated procedure needs reusable tooling beyond these instructions. Consider read-only CI monitoring only with explicit owner approval and a useful notification policy; do not schedule it now. Defer Playwright until implemented journeys justify end-to-end coverage. No plugin, orchestration library or new planning-document hierarchy is introduced. Capability availability is a dated observation, not a guarantee for every future session; recheck only what the task needs.
