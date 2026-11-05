@@ -6,11 +6,11 @@ Canonical local project: `/Users/rickybyrne/Documents/ChatGPT/baubled`. GitHub: 
 
 ## Current status
 
-As of **5 November 2026**, Milestone 1 remains accepted and complete. The offline Milestone 2 checkpoint and Node ESM correction are published through `bf98cb4` at [baubled.vercel.app](https://baubled.vercel.app/), with successful exact-SHA Actions, automatic Vercel deployment and controlled disabled-endpoint verification. The interface has 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration. See the [current evidence and working plan](docs/progress.md#milestone-2-live-integration-execution--5-november-2026).
+As of **5 November 2026**, Milestone 1 remains accepted and complete. The offline Milestone 2 checkpoint and Node ESM correction are published through `bf98cb4` at [baubled.vercel.app](https://baubled.vercel.app/), with successful exact-SHA Actions, automatic Vercel deployment and controlled disabled-endpoint verification. The interface has 12 sourced pub candidates, an interactive MapLibre coordinate canvas, ordered selection and versioned URL restoration. See the [current evidence and working plan](docs/progress.md#local-live-proof-results--5-november-2026).
 
-Milestone 2 is incomplete. The owner approved a simpler free-plan protection policy without metered WAF rate limiting, and sourced building locations rather than surveyed doors. Local preparation adds bounded map loading/attribution and best-effort warm-instance routing limits; these are not global abuse limits. Actual accounts, approved live calls and deployed integration remain unverified. Research acceptance and mocked routes are not milestone completion.
+Milestone 2 is incomplete. The owner approved a simpler free-plan protection policy without metered WAF rate limiting, and sourced building locations rather than surveyed doors. Local preparation adds bounded map loading/attribution and best-effort warm-instance routing limits; these are not global abuse limits. The owner confirmed Free/Standard accounts and a bounded local proof returned real tiles and an ordered twelve-stop/eleven-leg route. Production configuration and deployed integration remain unverified. Local evidence is not milestone completion.
 
-The default page runs without accounts, keys or external runtime requests. The map has no street tiles; its approximate building markers are not entrance-verified. Production and local routing entry points are closed, even if environment variables are accidentally supplied. Operating budget: **€0/month**.
+The default page runs without accounts, keys or external runtime requests. The map has no street tiles; its approximate building markers are not entrance-verified. Production, ordinary dev and preview routing remain closed even if environment variables are accidentally supplied. A separately approved, loopback-only `live-proof` dev mode is described below; its approved test allowance is now exhausted and locked closed. Operating budget: **€0/month**.
 
 ## Local setup
 
@@ -57,6 +57,18 @@ Use the Codex in-app browser when available, or a normal local browser. Start a 
 
 This lightweight procedure needs no new browser-test dependency. Add Playwright only when meaningful end-to-end journeys justify its separately reviewed scope.
 
+## Approved local live proof
+
+The owner approved this local phase on **5 November 2026**: at most **two document loads × 50 MapTiler HTTP attempts**, and **two ORS Directions attempts**, at least 60 seconds apart. Failures/cancellations count. Stop on the first unexpected result. No publication, Vercel setting, WAF activation or deployed test is included.
+
+1. The owner creates MapTiler **Free** and HeiGIT/ORS **Standard (€0)** accounts, handles terms/passwords, confirms no billing/trial activation, and restricts the single MapTiler key to `127.0.0.1` (no protocol/port). Do not test provider demo maps or paste keys into chat.
+2. In the isolated worktree only, the owner fills ignored `secrets/live-proof.env` with `MAPTILER_KEY`, `ORS_API_KEY`, and `FREE_PLANS_CONFIRMED=true` after checking the plans. The prepared file has owner-only permissions. Neither normal Vite env loading nor production builds read it; Vite file serving denies the entire `secrets` directory. ORS values must never have a `VITE_` prefix.
+3. After account/setup confirmation and checking provider availability, the operator runs `npm run dev -- --mode live-proof` from that worktree. It binds `http://127.0.0.1:5174` with a strict port, no watcher/HMR reloads or browser-console forwarding. Do not override its host/port, run a second proof server, or edit code while it is active. Do not use this mode for a build or preview.
+4. Open the first document once. Verify the street map, attribution and responsive layout by resizing that document. Route `p001,p002` once, then—after at least 60 seconds—route `p001,p002,p003,p004,p005,p006,p007,p008,p009,p010,p011,p012` once. Check route/snapping/instructions/metrics as specified in decisions. The second document is reserved for exact-order restoration, with **no third ORS request**.
+5. `secrets/live-proof-budget.json` stores counters/timestamps, a halt flag and an optional explicit review approval. Reservations persist before dispatch and survive server restarts. Do not delete/reset it or clear a halt without fresh approval. The owner separately approved one final review after an anchor-navigation defect was fixed: `additionalReviewApproved=true` raises the cumulative ceiling to three documents/three ORS calls, preserving every counter. That allowance has also been consumed; the ledger is halted. This is a dated approval, not permission for another run. After the proof, stop the server and latch the ledger closed, preserving counts. Replace MapTiler's temporary `127.0.0.1` origin with production-only `baubled.vercel.app`; never clear restrictions to an unrestricted key. This does not enable the still-closed production code.
+
+The accepted policy allows sourced building points; it does not establish current doorway access. Check every snapped pedestrian arrival and retain the 50-metre boundary. Avoid announced HeiGIT maintenance (6 November 2026, 07:30–11:30 UTC); recheck availability before the actual run. Account changes and keys remain owner actions. The owner confirmed cleanup to production-only `baubled.vercel.app` after the local test; production code is still disabled. See [local results](docs/progress.md#local-live-proof-results--5-november-2026). Routine automated tests use temporary synthetic credentials and fake provider responses, never this file or budget.
+
 ## Feature delivery
 
 Give Codex an outcome, relevant UX, constraints/non-goals, observable acceptance criteria and any owner-reserved decisions. Codex owns the implementation plan and continues through testing, correction and browser verification without routine approval between steps. See the [working agreement](AGENTS.md) and [delivery/publication workflow](docs/backlog.md#task-and-review-workflow).
@@ -72,7 +84,7 @@ Safe local feature-branch commits are allowed within the approved objective. Pus
 - `server/routing-budget.ts`: per-instance attempt/concurrency limits and quota/auth cooldowns; not a shared quota guarantee.
 - `shared/route.ts`, `shared/route-url.ts`: route validation/normalisation and basic versioned URL contract.
 - `api/walking-route.ts`, `server/walking-route.ts`: release-blocked entry point and tested server boundary.
-- `server/local-api.ts`: disabled-only loopback adapter used by Vite dev/preview; never reads a credential.
+- `server/local-api.ts`, `server/local-proof.ts`: ordinary disabled adapter plus explicitly approved loopback proof mode, private credential loading and persistent request counters.
 - `src/styles.css`: Tailwind theme, page styles, and focus foundation.
 - Tests beside the modules: deterministic provider, lifecycle, error, URL and UI behaviour; synthetic geographic data is confined to test helpers.
 - `vite.config.ts`, `tsconfig.json`, `eslint.config.js`: development checks.

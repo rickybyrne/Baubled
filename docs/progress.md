@@ -1,5 +1,68 @@
 # Progress
 
+## Local live proof results — 5 November 2026
+
+**Local integration technically verified; ready for owner review. Milestone 2 remains In progress.** Production live activation, Git publication and the deployed acceptance proof are not authorised or verified by this result. Work remains isolated on `codex/m2-live-proof`; canonical main is unchanged at `bf98cb40ec18e4467519616733dc01319fb61e1a`.
+
+The owner confirmed Free MapTiler and Standard ORS through the prepared local file, entered both keys without sharing them in chat, and confirmed MapTiler's only temporary allowed origin was `127.0.0.1`. Owner-only permissions and Git exclusion passed; scans found neither actual key in tracked files or the production build. Only the public MapTiler key is defined in the explicit local frontend mode; ORS remains in the Node handler. Plans/restrictions are owner-confirmed, not independently inspected private dashboards.
+
+### Live evidence
+
+- Real MapLibre/MapTiler Dublin street tiles loaded, with twelve sourced building markers, visible MapTiler logo, MapLibre/MapTiler/OSM credits and NIAH attribution. The 375px and 1280px views had no horizontal overflow; map failure/list fallback remains covered by deterministic checks.
+- ORS attempt 1, **23:36:57 UTC**: `p001,p002`, one validated leg, UI rounded to **556 m / 7 min**.
+- ORS attempt 2, **23:39:35 UTC**: `p001` through `p012` in exact order, **11 consecutive legs**, UI total **3.48 km / 42 min**, excluding pub visits. Every instruction disclosure was opened and readable English text checked. The normaliser accepted GeoJSON, ordered waypoint indices, all twelve snaps within 50 metres, finite non-negative metrics, contiguous leg geometry and consistent summed totals. UI rounds metres/minutes only for display; the contract retains metres/seconds.
+- A fresh document restored all twelve IDs in exact order from `?v=1&pubs=p001,...,p012` without automatically requesting directions. No duplicate, optimisation or return leg was inserted.
+- ORS attempt 3, **23:45:09 UTC**, separately approved after the UI fix below: repeated the twelve-stop route with the same rounded totals. The route stayed present after the CTA anchor and keyboard navigation. Its displayed line followed Dublin streets/paths, including the western bends towards Smithfield, rather than straight marker-to-marker lines. At 375px all eleven leg sections and the selected order remained present; keyboard Enter opened the instructions. No warning/error console entries were captured in the live pages.
+- Exact frontage/current door suitability was **not** established. The Cobblestone arrival instruction names Red Cow Lane; the existing official Backroom reference supports that access context but does not prove the ordinary pub doorway. All twelve records retain `entranceVerified: false`, unchanged source coordinates and the explicit building-location disclaimer. The owner accepted that scope.
+
+| Consecutive IDs | Displayed distance | Displayed duration |
+| --- | ---: | ---: |
+| p001 → p002 | 556 m | 7 min |
+| p002 → p003 | 93 m | 1 min |
+| p003 → p004 | 229 m | 3 min |
+| p004 → p005 | 357 m | 4 min |
+| p005 → p006 | 79 m | 1 min |
+| p006 → p007 | 252 m | 3 min |
+| p007 → p008 | 272 m | 3 min |
+| p008 → p009 | 291 m | 3 min |
+| p009 → p010 | 238 m | 3 min |
+| p010 → p011 | 125 m | 2 min |
+| p011 → p012 | 991 m | 12 min |
+
+These are observations of the approved live ORS response, not fixed estimates or test fixtures. Attribution: openrouteservice / HeiGIT; © OpenStreetMap contributors, CC BY-SA 4.0. Rounded leg values need not sum to the rounded total.
+
+### Stops, correction and budget
+
+During the first document, simultaneous owner exploration changed the selected plan and activated the conservative sequence/time guard before another upstream call. The session was stopped at one recorded call. The owner confirmed the interaction and explicitly approved resuming the remaining allowance; counters were preserved.
+
+After the second successful call, the visual check exposed a real defect: clicking the same-page planner anchor caused `popstate` to erase a ready route. Added two tests for pending/ready results across hash-only history events, observed both fail, then fixed the query-change boundary. Different shared-plan queries still invalidate old results. No retry was made under the exhausted original approval.
+
+The owner then approved one final document/call (50 additional MapTiler attempts maximum). The optional ledger extension preserves all consumed counts and permits at most three documents/three ORS calls in total. The final live review confirmed the correction. All starts were more than 60 seconds apart, outside the announced maintenance window. Final ledger: **documents 3, calls 3, halted true**. No raw provider responses, tiles or credentials were committed; screenshots retain attribution. Exact MapTiler attempt/billed counts were not recorded; the tested pre-dispatch guard bounds the three documents to **150 attempts maximum**.
+
+The live server and its tabs were closed. The owner confirmed cleanup to **only `baubled.vercel.app`** in MapTiler's allowed origins. The ignored keys remain local, and the exhausted ledger must not be reset or reopened without fresh approval. No Vercel settings, public activation, billing, WAF, remote Git or deployment operations occurred.
+
+### Validation and next gates
+
+`npm run verify` passed **156 tests across 13 files**, lint, strict TypeScript and the production build after the final changes. The known MapLibre chunk-size warning remains. Tests use synthetic credentials/responses; none consumes this live ledger. Default dev and production preview continue to show an offline map and controlled disabled-routing feedback. Browser checks confirmed CTA/skip-link focus and preserved disabled-service feedback after same-plan anchors; full pending/ready state regression is automated and the ready state was also rechecked live.
+
+Final static checks passed: complete intended diff review, `git diff --check`, Markdown fences/table columns/local links, actual-key scans of tracked/new source and the production build, and byte-preservation checks for the existing decisions/progress bodies. Both public approval constants remain false. Canonical main is clean; the preserved Task 2 branch is unchanged. Ordinary dev and production preview were checked at 375px/1280px with no horizontal overflow.
+
+No dependency install was needed: the lockfile/runtime/dependencies are unchanged. This local run is not a hosted CI result, production deployment proof, physical-device/screen-reader audit or street-level access survey. Existing Task 1/Task 2 acceptance and Milestone 1 evidence remain historical and preserved.
+
+Next: owner review of this local evidence and correction, then a separately approved production preparation/publication checkpoint: verify current Hobby configuration has no paid activation, place ORS only in Production server variables and MapTiler only as its public build key, keep previews without live credentials, review the release diff before opening public code gates, and approve normal publication plus a bounded deployed proof. The proposed deployed budget remains two ORS calls and up to 100 MapTiler attempts including any denied-origin check. That future proof must bind successful Actions/Vercel evidence to the exact release SHA, repeat twelve-stop/order/URL/attribution/path checks and preserve emergency disable/revocation. Do not mark this milestone complete from local results alone.
+
+## Approved local live-test setup — 5 November 2026
+
+**Preparation record, before the live run reported above: local phase authorised; awaiting owner accounts/keys; zero live requests used at that point. Milestone 2 remains In progress.** The owner approved the local-only proof and owner setup, with at most 100 MapTiler attempts across two documents and two ORS attempts (two stops, then twelve), at least 60 seconds apart; failures count and the first unexpected result stops the test. Neither provider account exists yet, according to the owner. Production publication/deployment/settings and the proposed deployed test remain unapproved.
+
+Prepared on `codex/m2-live-proof` after local checkpoint `25d21304e0521ddeaba311ecf957be1fcb022f36`: explicit loopback-only `live-proof` mode, owner-only ignored credential template, fail-closed plan/key validation, persistent document/request reservations across restarts, exact route-sequence and time-gap enforcement, safe error shutdown, and honest local-mode UI wording. The existing common handler retains all security/data validation. Production and ordinary dev/preview stay closed; only the explicitly selected dev mode can use the owner's file. No dependencies, hosted configuration or framework changes.
+
+Created `secrets/live-proof.env` with empty key fields and permissions 0600, without overwriting existing work. The owner was given official account links and instructions; no keys/passwords are requested in chat. Provider terms/account creation and credential entry are handed to the owner. Do not start the proof merely because the file later appears populated: confirm account plan/restriction setup, read current service availability and check the authorised budget first. Avoid HeiGIT's announced 6 November 07:30–11:30 UTC maintenance window.
+
+Validation: `npm run verify` passed **153 tests across 13 files**, lint, strict TypeScript and production build; the existing MapLibre size warning remains. New checks exercise persisted limits, exact sequence/timing, malformed-response shutdown, loopback Host checks, default closed behaviour, local versus production map activation and actual HTTP denial of secret files by Vite. An initial attempt to extend the deny list in `configResolved` was too late for Vite's matcher; a synthetic-file regression exposed it. The final configuration supplies the complete installed Vite defaults plus `secrets` before resolution, and the full check now passes. Status-only HEAD checks also confirm the earlier offline review server denies both direct and `/@fs/` paths with 403, without reading credential contents.
+
+At this preparation checkpoint, live tiles/routing and the local-mode browser journey were **Unverified**, pending owner setup. No request budget has been consumed by the deterministic tests. No push, deployment, account creation, key generation, billing or firewall modification was performed. The previous offline browser evidence remains historical; it does not stand in for the forthcoming live proof.
+
 ## Milestone 2 live integration execution — 5 November 2026
 
 **In progress; no live gate opened.** The owner authorised unblocked engineering for the live integration proof, local isolated commits and independent research, reserving security-policy decisions, accounts/credentials, live calls, firewall settings and publication/deployment for explicit approval. Work continues on `codex/m2-live-proof` in the existing managed worktree, based on the clean published `bf98cb40ec18e4467519616733dc01319fb61e1a`. Canonical main and preserved Task 2 work remain untouched.

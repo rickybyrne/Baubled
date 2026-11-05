@@ -15,9 +15,13 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
   const generation = useRef(0)
   const pending = useRef<AbortController | null>(null)
   const orderInput = useRef<HTMLInputElement>(null)
+  const restoredSearch = useRef(window.location.search)
 
   useEffect(() => {
     const restore = () => {
+      // Anchor navigation can emit popstate without changing the shared plan.
+      if (window.location.search === restoredSearch.current) return
+      restoredSearch.current = window.location.search
       generation.current++; pending.current?.abort(); pending.current = null
       const restored = restorePlan(window.location.search, pubs)
       setPlan(restored); setDraft(restored.ids.join(',')); setInputError(''); setRouting(idle)
@@ -31,6 +35,7 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
     setPlan({ ids, error: null }); setDraft(ids.join(',')); setInputError(''); setRouting(idle)
     // Explicit proof actions replace the current URL; full editor history is Milestone 6.
     window.history.replaceState(null, '', `${window.location.pathname}${planSearch(ids, pubs)}#route-planner`)
+    restoredSearch.current = window.location.search
   }
   async function calculate() {
     if (plan.ids.length < 2 || pending.current || !routing.retryable) return
@@ -53,9 +58,10 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
     orderInput.current?.focus()
   }
   const share = planSearch(plan.ids, pubs)
+  const localProof = import.meta.env.DEV && import.meta.env.MODE === 'live-proof'
   return <div className="integration-proof">
-    <p className="status">Integration proof · live services awaiting approval</p>
-    <p className="mt-4">Try an ordered plan with these sourced pub locations. Markers identify buildings, not verified doors. Walking directions remain disabled until the approved live integration test.</p>
+    <p className="status">{localProof ? 'Local live integration proof' : 'Integration proof · live services awaiting approval'}</p>
+    <p className="mt-4">Try an ordered plan with these sourced pub locations. Markers identify buildings, not verified doors. {localProof ? 'Live services are enabled for this bounded local test only.' : 'Walking directions remain disabled until the approved live integration test.'}</p>
     <DublinMap pubs={pubs} ids={plan.ids} route={routing.route} />
     <p className="text-sm mt-4">{LOCATION_ATTRIBUTION} <a href={LOCATION_DATASET} className="source-link">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" className="source-link">Licence</a></p>
     {plan.error && <div role="alert" className="feedback"><p>{plan.error} The original URL has been kept.</p><button onClick={clearPlan}>Start an empty plan</button></div>}

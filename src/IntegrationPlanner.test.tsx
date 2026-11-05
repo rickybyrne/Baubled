@@ -78,6 +78,25 @@ describe('integration proof UI', () => {
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
     expect(fetcher).toHaveBeenCalledTimes(1)
   })
+  it.each(['loading', 'ready'])('preserves a %s route across same-plan anchor navigation without another request', async state => {
+    let finish: (response: Response) => void = () => {}
+    const fetcher = vi.fn<typeof fetch>().mockImplementation(() => new Promise(resolve => { finish = resolve }))
+    const route = normaliseOrs(orsFixture(testPubs.slice(0, 2)), testPubs.slice(0, 2), CATALOGUE_REVISION)
+    render(<IntegrationPlanner pubs={testPubs} fetcher={fetcher} />)
+    order('p001,p002'); fireEvent.click(screen.getByRole('button', { name: 'Check walking route' }))
+    if (state === 'ready') await act(async () => { finish(Response.json(route)) })
+    act(() => {
+      window.history.pushState(null, '', '/?v=1&pubs=p001,p002#main-content')
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    })
+    if (state === 'loading') {
+      expect(screen.getByText('Finding your walking route…')).toBeVisible()
+      await act(async () => { finish(Response.json(route)) })
+    }
+    expect(await screen.findByRole('region', { name: 'Walking directions' })).toBeVisible()
+    expect(screen.getByText('Walking directions match this exact plan.')).toBeVisible()
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
   it('rejects an old A response after A→B→A even when cancellation is ineffective', async () => {
     vi.spyOn(AbortController.prototype, 'abort').mockImplementation(() => {})
     let finish: (response: Response) => void = () => {}

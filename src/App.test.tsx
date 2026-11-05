@@ -4,6 +4,14 @@ import App from './App'
 vi.mock('./DublinMap', () => ({ default: () => <p>Offline map</p> }))
 
 describe('Baubled foundation', () => {
+  it('clearly distinguishes the approved local proof from public activation', () => {
+    vi.stubEnv('DEV', true); vi.stubEnv('MODE', 'live-proof')
+    try {
+      render(<App />)
+      expect(screen.getByText('Local live integration proof')).toBeVisible()
+      expect(screen.getByText(/Public live directions remain disabled/)).toBeVisible()
+    } finally { vi.unstubAllEnvs() }
+  })
   it('introduces the project and honestly describes the planner destination', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: /a little dublin.*a little festive/i })).toBeVisible()

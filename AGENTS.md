@@ -15,7 +15,7 @@ Inspect Git status, current task requirements and relevant source before editing
 - [Progress](docs/progress.md): implementation status and dated verification evidence.
 - [Deployment](docs/deployment.md): production configuration and deployed evidence.
 
-Milestone 1 is accepted and deployed. The current code contains the authorised Milestone 2 offline integration proof; live providers, pedestrian entrances and milestone acceptance remain unverified. Read current progress before continuing. Roadmap entries are not authorisation. Current owner instructions take precedence over older task-specific restrictions; preserve dated reports as history.
+Milestone 1 is accepted and deployed. The current feature branch also has a bounded local live proof: real tiles and twelve-stop routing passed. Public provider activation, deployed proof and milestone acceptance remain unverified; sourced building points are explicitly not surveyed entrances. The local live allowance is exhausted and closed. Read current progress before continuing. Roadmap entries are not authorisation. Current owner instructions take precedence over older task-specific restrictions; preserve dated reports as history.
 
 ## Own the approved outcome
 
