@@ -4,7 +4,7 @@ import { testPubs, orsFixture } from './test/fixtures'
 import { normaliseOrs } from '../shared/route'
 import DublinMap from './DublinMap'
 
-const fake = vi.hoisted(() => ({ maps: [] as Array<{ options: Record<string, unknown>; events: Record<string, () => void>; removed: boolean; sources: Set<string>; layers: Set<string>; addSource: ReturnType<typeof vi.fn> }> }))
+const fake = vi.hoisted(() => ({ failControls: false, maps: [] as Array<{ options: Record<string, unknown>; events: Record<string, () => void>; removed: boolean; sources: Set<string>; layers: Set<string>; addSource: ReturnType<typeof vi.fn> }> }))
 vi.mock('maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url', () => ({ default: '/test-worker.js' }))
 vi.mock('maplibre-gl', () => ({
   setWorkerUrl: vi.fn(), NavigationControl: class {}, AttributionControl: class {},
@@ -15,7 +15,8 @@ vi.mock('maplibre-gl', () => ({
     sources = new Set<string>(); layers = new Set<string>()
     addSource = vi.fn((name: string) => { this.sources.add(name) })
     constructor(options: Record<string, unknown>) { this.options = options; fake.maps.push(this) }
-    addControl() {} fitBounds() {} on(name: string, handler: () => void) { this.events[name] = handler }
+    addControl() { if (fake.failControls) throw new Error('Control setup failed') }
+    fitBounds() {} on(name: string, handler: () => void) { this.events[name] = handler }
     remove() { this.removed = true }
     getSource(name: string) { return this.sources.has(name) } removeSource(name: string) { this.sources.delete(name) }
     getLayer(name: string) { return this.layers.has(name) } removeLayer(name: string) { this.layers.delete(name) }
@@ -23,6 +24,15 @@ vi.mock('maplibre-gl', () => ({
   },
 }))
 describe('map boundary', () => {
+  it('disposes a partially initialised map when control setup fails', async () => {
+    fake.failControls = true
+    try {
+      const { unmount } = render(<DublinMap pubs={testPubs} ids={[]} route={null} />)
+      await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Map unavailable'))
+      expect(fake.maps.at(-1)?.removed).toBe(true)
+      unmount()
+    } finally { fake.failControls = false }
+  })
   it('uses an offline style even if a browser key is present, shows fallback and cleans up', async () => {
     vi.stubEnv('VITE_MAPTILER_KEY', 'PUBLIC_TEST_SENTINEL')
     const { unmount } = render(<DublinMap pubs={testPubs} ids={[]} route={null} />)

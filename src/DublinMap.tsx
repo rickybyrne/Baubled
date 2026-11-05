@@ -28,7 +28,7 @@ export default function DublinMap({ pubs, ids, route }: { pubs: readonly Pub[]; 
       instance.addControl(new libre.NavigationControl({ showCompass: false }), 'top-right')
       instance.addControl(new libre.AttributionControl({ compact: false }), 'bottom-right')
       instance.on('load', () => {
-        if (disposed) return
+        if (disposed || !instance) return
         const positions = pubs.flatMap(pub => pub.status === 'active' && pub.position ? [pub.position] : [])
         if (positions.length) instance?.fitBounds([
           [Math.min(...positions.map(p => p[0])), Math.min(...positions.map(p => p[1]))],
@@ -46,10 +46,16 @@ export default function DublinMap({ pubs, ids, route }: { pubs: readonly Pub[]; 
         button.className = 'pub-marker'
         button.setAttribute('aria-label', `Map location: ${pub.name}`)
         button.textContent = '●'
-        const popup = new libre.Popup({ offset: 25 }).setText(`${pub.name} — published building location; pedestrian entrance unverified.`)
+        const popup = new libre.Popup({ offset: 25 }).setText(`${pub.name} — published building location; pedestrian entrance unverified.${pub.locationNote ? ` ${pub.locationNote}` : ''}`)
         markers.push(new libre.Marker({ element: button }).setLngLat(pub.position).setPopup(popup).addTo(instance))
       }
-    }).catch(() => { if (!disposed) setStatus('failed') })
+    }).catch(() => {
+      if (!disposed) {
+        markers.forEach(marker => marker.remove())
+        instance?.remove(); instance = undefined; map.current = null
+        setStatus('failed')
+      }
+    })
     return () => { disposed = true; markers.forEach(marker => marker.remove()); instance?.remove(); map.current = null }
   }, [pubs])
   useEffect(() => {

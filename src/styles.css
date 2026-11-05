@@ -81,6 +81,7 @@ input[type="text"], input:not([type]) { display: block; width: 100%; min-height:
 .pub-marker { width: 44px; height: 44px; border-radius: 50%; padding: 0; color: var(--color-red); background: var(--color-cream); }
 .maplibregl-ctrl-group button { width: 44px; height: 44px; }
 .maplibregl-popup-close-button { min-width: 44px; }
+.maplibregl-popup-content { padding: 12px 56px 12px 12px; }
 details { padding-block: .5rem; border-bottom: 1px solid #173e3533; }
 summary { min-height: 44px; cursor: pointer; }
 details ol { padding-left: 1.5rem; list-style: decimal; }

@@ -14,6 +14,7 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
   const [routing, setRouting] = useState<RoutingState>(idle)
   const generation = useRef(0)
   const pending = useRef<AbortController | null>(null)
+  const orderInput = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const restore = () => {
@@ -42,17 +43,22 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
     } catch (error) {
       if (token === generation.current && !controller.signal.aborted) setRouting({ kind: 'error', route: null,
         retryable: !(error instanceof RoutingClientError) || error.retryable,
-        message: error instanceof Error && !(error instanceof DOMException) ? error.message : 'Walking directions could not be loaded. Your stops are unchanged.' })
+        message: error instanceof RoutingClientError ? error.message : 'Walking directions could not be loaded. Your stops are unchanged.' })
     } finally { if (token === generation.current) pending.current = null }
   }
   const selected = plan.ids.map(id => pubs.find(pub => pub.id === id)!)
+  function clearPlan() {
+    apply([])
+    // Recovery removes/disables its triggering button; retain a useful keyboard position.
+    orderInput.current?.focus()
+  }
   const share = planSearch(plan.ids, pubs)
   return <div className="integration-proof">
     <p className="status">Integration proof · live services awaiting approval</p>
     <p className="mt-4">Try an ordered plan with these sourced pub candidates. Building locations still need entrance checks. Walking directions remain disabled while the free-service protection gate is reviewed.</p>
     <DublinMap pubs={pubs} ids={plan.ids} route={routing.route} />
     <p className="text-sm mt-4">{LOCATION_ATTRIBUTION} <a href={LOCATION_DATASET} className="source-link">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" className="source-link">Licence</a></p>
-    {plan.error && <div role="alert" className="feedback"><p>{plan.error} The original URL has been kept.</p><button onClick={() => apply([])}>Start an empty plan</button></div>}
+    {plan.error && <div role="alert" className="feedback"><p>{plan.error} The original URL has been kept.</p><button onClick={clearPlan}>Start an empty plan</button></div>}
     <div className="proof-columns">
       <section aria-labelledby="fixture-heading">
         <h3 id="fixture-heading">Pub fixture candidates</h3>
@@ -62,6 +68,7 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
           <label><input type="checkbox" checked={plan.ids.includes(pub.id)} disabled={Boolean(plan.error) || (!plan.ids.includes(pub.id) && plan.ids.length >= 12)}
             onChange={event => apply(event.target.checked ? [...plan.ids, pub.id] : plan.ids.filter(id => id !== pub.id))} /><span><strong>{pub.name}</strong>{' '}<br /><span className="text-sm">{pub.address} · {pub.id}</span></span></label>
           <a className="source-link" href={pub.identitySource}>Venue source{' '}<span className="sr-only">for {pub.name}</span></a>
+          {pub.locationNote && <p className="text-sm">{pub.locationNote}</p>}
         </li>)}</ul>
       </section>
       <section aria-labelledby="order-heading">
@@ -75,12 +82,12 @@ export default function IntegrationPlanner({ pubs = PUBS, fetcher }: { pubs?: re
         }}>
           <label htmlFor="ordered-ids">Ordered pub IDs</label>
           <p id="ids-help" className="text-sm">Comma-separated, with no spaces. Applying a list preserves its exact order.</p>
-          <input id="ordered-ids" value={draft} onChange={event => setDraft(event.target.value)} maxLength={256} aria-describedby="ids-help" aria-invalid={Boolean(inputError)} />
+          <input ref={orderInput} id="ordered-ids" value={draft} onChange={event => setDraft(event.target.value)} maxLength={256} aria-describedby="ids-help" aria-invalid={Boolean(inputError)} />
           <button type="submit">Apply order</button>
         </form>
         {inputError && <p role="alert" className="feedback">{inputError} Your current plan is unchanged.</p>}
         <div className="proof-actions">
-          <button onClick={() => apply([])} disabled={!plan.ids.length && !plan.error}>Clear plan</button>
+          <button onClick={clearPlan} disabled={!plan.ids.length && !plan.error}>Clear plan</button>
           <button onClick={() => void calculate()} disabled={plan.ids.length < 2} aria-disabled={!routing.retryable}>Check walking route</button>
         </div>
         {share && <a className="share-link" href={`${share}#route-planner`}>Open this exact plan</a>}

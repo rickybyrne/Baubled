@@ -12,6 +12,7 @@ export interface Pub {
   coordinateRecord?: string
   checkedOn: string
   entranceVerified: boolean
+  locationNote?: string
 }
 
 export const CATALOGUE_REVISION = 'dublin-proof-2026-11-05'
@@ -24,7 +25,7 @@ export const PUBS: readonly Pub[] = [
   { id: 'p002', name: 'The Confession Box', address: '88 Marlborough Street, Dublin', position: [-6.258411, 53.350327], coordinateRecord: '50010241', identitySource: 'https://theconfessionbox.ie/' },
   { id: 'p003', name: 'Madigan’s Earl Street', address: '25 North Earl Street, Dublin', position: [-6.259301, 53.350061], coordinateRecord: '50010252', identitySource: 'https://www.madigansearlst.com/contact-us' },
   { id: 'p004', name: 'Madigan’s O’Connell Street', address: '19 O’Connell Street, Dublin', position: [-6.260547, 53.351414], coordinateRecord: '50010548', identitySource: 'https://www.madigansdublin.com/location-contact-us' },
-  { id: 'p005', name: 'Grand Central', address: '10–11 O’Connell Street, Dublin', position: [-6.259180, 53.348326], coordinateRecord: '50010275', identitySource: 'https://grandcentral.ie/' },
+  { id: 'p005', name: 'Grand Central', address: '10–11 O’Connell Street, Dublin', position: [-6.259180, 53.348326], coordinateRecord: '50010275', identitySource: 'https://grandcentral.ie/', locationNote: 'The association between this building record and Grand Central still needs review.' },
   { id: 'p006', name: 'The Oval', address: '78 Middle Abbey Street, Dublin', position: [-6.260283, 53.348441], coordinateRecord: '50010405', identitySource: 'https://theovalbar.com/contact/' },
   { id: 'p007', name: 'The Lotts Café Bar', address: '9 Lower Liffey Street, Dublin', position: [-6.263322, 53.347363], coordinateRecord: '50010373', identitySource: 'https://www.thelottscafebar.com/contact/' },
   { id: 'p008', name: 'T.P. Smith’s', address: '9–10 Jervis Street, Dublin', position: [-6.266008, 53.347480], coordinateRecord: '50010411', identitySource: 'https://tpsmiths.ie/' },
