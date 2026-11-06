@@ -1,4 +1,5 @@
 import IntegrationPlanner from './IntegrationPlanner'
+import { isPublicProof } from './live-map-config'
 
 export default function App() {
   return (
@@ -18,8 +19,9 @@ export default function App() {
               <p className="hero-description">Your favourite people, a few Dublin pubs, and an evening that’s yours to plan. A festive pub crawl planner is taking shape.</p>
               <a className="primary-link" href="#route-planner">Plan your route <span aria-hidden="true">↗</span></a>
               <p className="mt-4 text-sm text-cream/80">{import.meta.env.DEV && import.meta.env.MODE === 'live-proof' ?
-                'An approved local integration test. Public live directions remain disabled.' :
-                'An early integration proof — live walking directions are not yet available.'}</p>
+                'An approved local integration test with a separate request allowance.' : isPublicProof() ?
+                'An early integration proof. Walking estimates depend on provider availability.' :
+                'An offline integration proof — live services are disabled in this environment.'}</p>
             </div>
             <div className="ornament" aria-hidden="true">
               <div className="ornament-cap" />

@@ -1,7 +1,6 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createWalkingHandler, ORS_URL } from './walking-route'
-import entry from '../api/walking-route'
 import { testPubs, orsFixture } from '../src/test/fixtures'
 
 const origin = 'https://baubled.vercel.app'
@@ -84,10 +83,6 @@ describe('routing handler', () => {
     const { handler, fetcher } = setup(overrides)
     expect((await handler(request())).status).toBe(503)
     expect(fetcher).not.toHaveBeenCalled()
-  })
-  it('cannot activate the shipped entry point via environment variables', async () => {
-    vi.stubEnv('ROUTING_ENABLED', 'true'); vi.stubEnv('ORS_API_KEY', key)
-    expect((await entry.fetch(request())).status).toBe(503)
   })
   it.each([[429, {}, 503], [401, {}, 503], [403, { error: { message: key } }, 503],
     [400, { error: { code: 2009 } }, 422], [404, { error: { code: 2010 } }, 422],
