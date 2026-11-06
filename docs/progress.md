@@ -1,5 +1,15 @@
 # Progress
 
+## Production preparation checkpoint — 6 November 2026
+
+**Ready for activation review; live release gates remain closed. Milestone 2 In progress.** The owner authorised Production-only credential preparation and a deployment checkpoint after the local proof. Reviewed current Vercel Hobby/billing/build/function/firewall/environment settings without enabling features or deploying. The owner saved `ORS_API_KEY` as Secret and `VITE_MAPTILER_KEY` as Config, both project-scoped Production only. The saved records/scopes were verified without revealing values; no shared variables are linked. `ROUTING_ENABLED` is absent. ORS's write-only edit field is blank by design; the stored key's validity remains unverified.
+
+Recorded current settings, environment isolation, concrete proposed activation/publication changes, emergency shutdown limits and a proposed two-ORS/two-document (100 MapTiler attempt) deployed test in [deployment](deployment.md#production-live-proof-preparation--6-november-2026). Both public code gates stay false; production remains the previously verified offline checkpoint. The local allowance remains three documents/three calls, exhausted and halted. No live provider calls, publication, production deployment, paid activation or firewall changes occurred. The owner's origin cleanup remains only `baubled.vercel.app`.
+
+Validation at this preparation: `npm run verify` passed **156 tests in 13 files**, lint, strict TypeScript and production build on Node 24.19.0/npm 12.2.0. The known MapLibre chunk warning remains. Complete preparation diff review, `git diff --check`, Markdown structure and 25 local links passed. Actual-key scans of 56 tracked/build files found no exposure; the ignored local credential file remains 0600 and its exhausted ledger is still halted. Historical deployment/progress bodies are byte-preserved. Canonical main is clean and the preserved Task 2 ref is unchanged. No code, dependency, build or CI changes were made during this preparation. No dependency reinstall or repeated browser UI pass was necessary; prior local desktop/mobile live and offline evidence remains separately dated above/below. Hosted CI/deployed provider results are not established by these local tests.
+
+Next: explicit approval to prepare/open the public activation gates and Production runtime switch, then review the resulting tested diff before publishing normally to main and performing the bounded deployed proof. The present setup approval does not authorise those actions. Preserve the accepted historical research and both existing local feature commits (`25d2130`, `ddfcc6c`), canonical main at `bf98cb4`, and the separate preserved Task 2 branch. Do not begin Milestone 3.
+
 ## Local live proof results — 5 November 2026
 
 **Local integration technically verified; ready for owner review. Milestone 2 remains In progress.** Production live activation, Git publication and the deployed acceptance proof are not authorised or verified by this result. Work remains isolated on `codex/m2-live-proof`; canonical main is unchanged at `bf98cb40ec18e4467519616733dc01319fb61e1a`.

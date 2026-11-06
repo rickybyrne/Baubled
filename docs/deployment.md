@@ -1,5 +1,52 @@
 # Deployment and verification
 
+## Production live-proof preparation — 6 November 2026
+
+**Prepared, not deployed. Milestone 2 remains In progress.** The owner authorised Production-only credential setup and preparation of the publication checkpoint after the successful local proof. This is not permission to open release gates, merge/push, deploy or make further provider calls. The published offline source remains `bf98cb40ec18e4467519616733dc01319fb61e1a`; the tested local feature checkpoint is `ddfcc6c4785ad1e2305b5a67a98efb0982d813e8` on `codex/m2-live-proof`. Both code-owned provider gates remain **false**.
+
+### Saved configuration and financial boundary
+
+The authenticated dashboard was inspected across 5–6 November, without changing billing, firewall or function/build settings:
+
+- Hobby Active; no payment method; displayed paid add-ons, Flat Rate CDN and AI auto-reload off. Basic build machine; on-demand concurrent builds disabled. No custom firewall rules, IP blocking or system-bypass rules; Bot Protection off. No metered rate-limit control was activated.
+- Functions: Fluid Compute already enabled, Standard 1 vCPU / 2 GB, one region (`iad1`). The existing repository function configuration keeps a 15-second platform duration and cancellation support; the handler separately bounds upstream work to ten seconds. These limits and warm-instance counters do not establish global abuse prevention.
+- Vite, Node 24.x, repository-root build, `dist`, install override `npx --yes npm@12.2.0 ci`, build override `node --version && npx --yes npm@12.2.0 run build`. Production tracks `main`; previews track other Git branches. No deployment checks configured: Actions and Vercel run independently.
+- Project variables initially empty. After owner entry, the dashboard lists exactly the two records below, both Production only; no shared variables are linked. No Preview/Development values or routing-enable variable were added. Values were not revealed or read back. ORS's empty edit box is expected for a write-only Secret and does not establish an empty saved value; its correctness is still unverified until an approved live request.
+
+| Project variable | Type / exposure | Scope / state |
+| --- | --- | --- |
+| `ORS_API_KEY` | Secret, server-only; never a `VITE_` variable | Production only; saved by owner, value validity unverified |
+| `VITE_MAPTILER_KEY` | Config, intentionally public browser key | Production only; saved by owner; allowed origin confirmed as only `baubled.vercel.app` |
+| `ROUTING_ENABLED` | Server Config, exact value `true` would enable the runtime switch | Absent; setting it for activation requires the next approval |
+
+Create the two credential records separately because Vercel applies the form's Type to all added rows. Keep the MapTiler `VITE_` prefix; its public-exposure warning is expected. Keep ORS Secret. Credential entry and Save are owner actions, with no values in chat, screenshots or repository. Do not use a shared/team variable for this project or copy keys into previews. The local ignored file remains owner-only, and its exhausted proof ledger stays halted.
+
+Official sources rechecked 5–6 November: [environment variables](https://vercel.com/docs/environment-variables) apply only to new deployments, and [Config/Secret documentation](https://vercel.com/docs/environment-variables/sensitive-environment-variables) describes public Config versus write-only Secret values. Secrets are also available to builds: review trusted source before any approved production deployment, and never log/export ORS from build code. The [Hobby plan](https://vercel.com/docs/plans/hobby) retains free personal/non-commercial limits; the [pricing FAQ](https://vercel.com/pricing) says Hobby cannot purchase additional usage. This supports the current €0 configuration, not guaranteed availability or protection against later owner upgrades. The accepted residual abuse/quota risks in [decisions](decisions.md#milestone-2-live-proof-preparation--5-november-2026) still apply.
+
+### Concrete activation/publication checkpoint — approval pending
+
+The next requested approval must explicitly cover the following activation changes, verification and publication. None has happened in this preparation:
+
+1. Prepare the small activation diff on the isolated branch: open the two code gates, require exact `VERCEL_ENV=production` plus `ROUTING_ENABLED=true` at the server entry, and restrict browser activation to a production build on exactly `https://baubled.vercel.app`. Local/preview/no-key cases stay closed. Update public proof copy without claiming surveyed doors or milestone acceptance. Add deterministic activation, native Node startup and copy regressions, then rerun full verification and browser checks without real keys/providers.
+2. Review the entire integrated diff and secret/bundle/history checks. Preserve canonical main and the retained Task 2 branch; confirm remote main has not advanced. Set only the Production server Config `ROUTING_ENABLED=true` after explicit activation approval. Existing deployments do not change when variables are saved.
+3. Only after passing those checks and explicit publication approval: commit the reviewed diff, fast-forward canonical main to the approved descendant, push normally to `origin/main`, and verify Actions plus automatic Vercel Ready for the exact resulting SHA. Do not force-push, manually redeploy, activate WAF or change billing. Stop for an unexpected remote/history/deployment discrepancy.
+4. Perform the separately approved bounded deployed proof below, then request milestone acceptance. A successful build or saved environment variable is not live evidence.
+
+### Proposed deployed proof budget — not yet authorised
+
+Before running, recheck provider availability and account plans/restrictions. Avoid announced HeiGIT maintenance on 6 November, 07:30–11:30 UTC. Bind the source, Actions and Vercel evidence to the exact approved SHA before opening the live page.
+
+- At most **two fresh production documents**, each protected by the existing **50-attempt MapTiler transport cap**: at most **100 MapTiler HTTP attempts** in this operator's proof. Resize those documents for 1280px/375px checks; no extra reloads, provider demo pages or separate origin probes. Failures and cancellations count. This is an operator test budget, not a global public traffic limit; other visitors can consume quota independently after activation.
+- At most **two ORS Directions attempts**, at least **60 seconds apart**, with no retries: first `p001,p002`; then a fresh shared URL restoring `p001` through `p012` in exact order, followed by one explicit twelve-stop request. Restoration itself must not request directions. Reserve attempts before dispatch and stop at the first unexpected result; do not reuse/reset the exhausted local ledger.
+- Verify real street tiles, twelve sourced building markers, required credits/logo, exact URL/order retention, eleven consecutive walking legs, validated geometry/snaps/metrics and readable English instructions. Inspect the street-following line and arrival context while retaining all unverified-door disclaimers. Exercise CTA/keyboard/mobile layout without creating extra documents. Confirm no ORS credential in the built frontend or returned payloads; avoid recording raw headers/provider bodies. Record counts, time, source SHA, UI evidence and limitations.
+- Use deterministic tests for auth/quota/timeouts/malformed data/cancellation and unavailable map states. Never exhaust quotas or intentionally submit a bad live key to test error UI. No live response or tile caching/persistence is approved.
+
+Emergency procedure: stop test traffic and report the evidence; the owner can revoke ORS credentials to stop their use across old and new deployments, or separately approve an included static deny rule after checking its current cost/configuration. For a durable code/config shutdown, set `ROUTING_ENABLED=false` and publish an approved disabled build. Environment changes alone do **not** immediately stop an existing deployment or invalidate old immutable deployment URLs. MapTiler origin restrictions remain production-only; do not remove them to troubleshoot. No automatic retry, upgrade or paid fallback is allowed.
+
+## Historical Milestone 1 deployment record
+
+The following sections are preserved as the original dated foundation evidence; statements about no API functions or environment variables describe that earlier scope.
+
 Checked 17 October 2026. The owner connected GitHub and initiated the first deployment after preparation. The public homepage is verified at **[baubled.vercel.app](https://baubled.vercel.app/)**. The owner subsequently **Accepted Milestone 1 as complete**, retaining the documented testing limitations. The verification review made no account, billing, deployment or GitHub changes. A subsequent finalisation task is authorised to commit/push only the three deployment documents and verify CI plus any automatic production deployment.
 
 ## Verified first deployment — 17 October 2026
